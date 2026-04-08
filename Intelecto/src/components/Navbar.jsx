@@ -23,8 +23,8 @@ export default function Navbar() {
         { to: "/nosotros", label: "Nosotros" },
         { to: "/servicios", label: "Servicios" },
         { to: "/trabajo", label: "Trabajo" },
-        { to: "/catalogo", label: "Catálogo" },
-        { to: "/contacto", label: "Contacto" },
+/*         { to: "/catalogo", label: "Catálogo" },
+ */        { to: "/contacto", label: "Contacto" },
     ]
 
     return (
@@ -50,17 +50,17 @@ export default function Navbar() {
                         margin: scrolled ? "0" : "16px 24px",
                         borderRadius: scrolled ? "0" : "20px",
                         background: scrolled
-                            ? "rgba(2,8,24,0.92)"
-                            : "rgba(4,15,42,0.55)",
-                        backdropFilter: "blur(20px)",
-                        WebkitBackdropFilter: "blur(20px)",
+                            ? "rgba(255,255,255,0.78)"
+                            : "rgba(255,255,255,0.42)",
+                        backdropFilter: "blur(22px)",
+                        WebkitBackdropFilter: "blur(22px)",
                         border: scrolled
                             ? "none"
-                            : "1px solid rgba(148,180,255,0.12)",
-                        borderBottom: "1px solid rgba(148,180,255,0.08)",
+                            : "1px solid rgba(255,255,255,0.45)",
+                        borderBottom: "1px solid rgba(148,163,184,0.12)",
                         boxShadow: scrolled
-                            ? "0 1px 0 rgba(148,180,255,0.07), 0 8px 32px rgba(0,0,0,0.4)"
-                            : "0 4px 24px rgba(0,0,0,0.3)",
+                            ? "0 1px 0 rgba(255,255,255,0.7), 0 16px 45px rgba(15,23,42,0.12)"
+                            : "0 18px 50px rgba(15,23,42,0.10), 0 0 0 1px rgba(255,255,255,0.35)",
                         transition: "all 0.5s cubic-bezier(0.22,1,0.36,1)",
                     }}
                 >
@@ -71,8 +71,8 @@ export default function Navbar() {
                             <img
                                 src={logo}
                                 alt="Intelecto"
-                                className="h-9 w-auto object-contain"
-                                style={{ filter: "brightness(0) invert(1)", opacity: 0.92 }}
+                                className="h-10 w-auto object-contain"
+                                style={{ filter: "brightness(0) saturate(100%)", opacity: 0.96 }}
                             />
                         </Link>
 
@@ -84,8 +84,8 @@ export default function Navbar() {
                                     <Link
                                         key={link.to}
                                         to={link.to}
-                                        className="relative px-4 py-2 text-sm font-medium rounded-lg group transition-colors duration-300"
-                                        style={{ color: isActive ? "#fff" : "rgba(255,255,255,0.5)" }}
+                                        className="relative px-4 py-2 text-sm font-medium rounded-xl group transition-all duration-300 hover:-translate-y-0.5"
+                                        style={{ color: isActive ? "#0f172a" : "#334155" }}
                                     >
                                         {/* Hover/active bg */}
                                         {isActive && (
@@ -93,20 +93,29 @@ export default function Navbar() {
                                                 layoutId="nav-pill"
                                                 className="absolute inset-0 rounded-lg"
                                                 style={{
-                                                    background: "rgba(255,255,255,0.06)",
-                                                    border: "1px solid rgba(255,255,255,0.08)",
+                                                    background: "linear-gradient(135deg, rgba(255,255,255,0.96), rgba(240,249,255,0.92))",
+                                                    border: "1px solid rgba(0,180,216,0.18)",
+                                                    boxShadow: "0 12px 24px rgba(15,23,42,0.08)",
                                                 }}
                                                 transition={{ type: "spring", stiffness: 400, damping: 30 }}
                                             />
                                         )}
-                                        <span className="relative z-10 group-hover:text-white transition-colors duration-300">
+                                        <motion.div
+                                            className="absolute inset-0 rounded-xl opacity-0 group-hover:opacity-100 transition-opacity duration-300"
+                                            style={{
+                                                background: "linear-gradient(135deg, rgba(255,255,255,0.85), rgba(240,249,255,0.7))",
+                                                boxShadow: "0 10px 20px rgba(15,23,42,0.06)",
+                                            }}
+                                        />
+                                        <span className="relative z-10 group-hover:text-[#0f172a] transition-colors duration-300">
                                             {link.label}
                                         </span>
                                         {/* Dot indicator activo */}
                                         {isActive && (
                                             <motion.div
                                                 layoutId="nav-dot"
-                                                className="absolute bottom-1 left-1/2 -translate-x-1/2 w-1 h-1 rounded-full bg-blue-400"
+                                                className="absolute bottom-1.5 left-1/2 -translate-x-1/2 w-1.5 h-1.5 rounded-full"
+                                                style={{ background: "#00b4d8", boxShadow: "0 0 12px rgba(0,180,216,0.45)" }}
                                             />
                                         )}
                                     </Link>
@@ -118,19 +127,21 @@ export default function Navbar() {
                         <div className="hidden md:flex items-center gap-4">
                             <Link
                                 to="/contacto"
-                                className="relative overflow-hidden px-5 py-2.5 rounded-xl text-sm font-semibold text-white transition-transform hover:scale-105 duration-300"
+                                className="relative overflow-hidden px-5 py-2.5 rounded-xl text-sm font-semibold text-white transition-all hover:scale-105 duration-300"
                                 style={{
-                                    background: "linear-gradient(135deg, #3b82f6, #6366f1)",
-                                    boxShadow: "0 0 20px rgba(99,102,241,0.3)",
+                                    background: "linear-gradient(135deg, #023e8a, #0077b6)",
+                                    boxShadow: "0 14px 30px rgba(0,119,182,0.24)",
                                 }}
                             >
                                 <span className="relative z-10">Agendar consulta</span>
                                 {/* Shimmer */}
-                                <div
+                                <motion.div
                                     className="absolute inset-0 opacity-0 hover:opacity-100 transition-opacity duration-500"
                                     style={{
                                         background: "linear-gradient(105deg, transparent 40%, rgba(255,255,255,0.15) 50%, transparent 60%)",
                                     }}
+                                    animate={{ x: ["-120%", "120%"] }}
+                                    transition={{ repeat: Infinity, duration: 2.8, ease: "linear" }}
                                 />
                             </Link>
                         </div>
@@ -138,7 +149,12 @@ export default function Navbar() {
                         {/* MOBILE BTN */}
                         <button
                             className="md:hidden flex items-center justify-center w-9 h-9 rounded-lg transition-colors duration-200"
-                            style={{ color: "rgba(255,255,255,0.7)", background: "rgba(255,255,255,0.06)" }}
+                            style={{
+                                color: "#0f172a",
+                                background: "rgba(255,255,255,0.72)",
+                                border: "1px solid rgba(148,163,184,0.18)",
+                                boxShadow: "0 10px 24px rgba(15,23,42,0.08)",
+                            }}
                             onClick={() => setOpen(!open)}
                             aria-label="Toggle menu"
                         >
@@ -169,10 +185,11 @@ export default function Navbar() {
                             style={{
                                 margin: "4px 24px 0",
                                 borderRadius: "16px",
-                                background: "rgba(4,15,42,0.96)",
+                                background: "rgba(255,255,255,0.88)",
                                 backdropFilter: "blur(24px)",
                                 WebkitBackdropFilter: "blur(24px)",
-                                border: "1px solid rgba(148,180,255,0.1)",
+                                border: "1px solid rgba(255,255,255,0.55)",
+                                boxShadow: "0 22px 50px rgba(15,23,42,0.12)",
                                 overflow: "hidden",
                             }}
                         >
@@ -191,24 +208,29 @@ export default function Navbar() {
                                                 onClick={() => setOpen(false)}
                                                 className="flex items-center justify-between px-4 py-3 rounded-xl text-sm font-medium transition-all duration-200"
                                                 style={{
-                                                    color: isActive ? "#fff" : "rgba(255,255,255,0.5)",
-                                                    background: isActive ? "rgba(255,255,255,0.07)" : "transparent",
+                                                    color: isActive ? "#0f172a" : "#334155",
+                                                    background: isActive ? "linear-gradient(135deg, rgba(255,255,255,0.96), rgba(240,249,255,0.9))" : "transparent",
+                                                    boxShadow: isActive ? "0 10px 24px rgba(15,23,42,0.08)" : "none",
+                                                    border: isActive ? "1px solid rgba(0,180,216,0.16)" : "1px solid transparent",
                                                 }}
                                             >
                                                 <span>{link.label}</span>
                                                 {isActive && (
-                                                    <span className="w-1.5 h-1.5 rounded-full bg-blue-400" />
+                                                    <span className="w-1.5 h-1.5 rounded-full" style={{ background: "#00b4d8", boxShadow: "0 0 12px rgba(0,180,216,0.45)" }} />
                                                 )}
                                             </Link>
                                         </motion.div>
                                     )
                                 })}
-                                <div className="mt-2 pt-3" style={{ borderTop: "1px solid rgba(255,255,255,0.06)" }}>
+                                <div className="mt-2 pt-3" style={{ borderTop: "1px solid rgba(148,163,184,0.16)" }}>
                                     <Link
                                         to="/contacto"
                                         onClick={() => setOpen(false)}
                                         className="block text-center py-3 rounded-xl text-sm font-semibold text-white"
-                                        style={{ background: "linear-gradient(135deg, #3b82f6, #6366f1)" }}
+                                        style={{
+                                            background: "linear-gradient(135deg, #023e8a, #0077b6)",
+                                            boxShadow: "0 14px 30px rgba(0,119,182,0.22)",
+                                        }}
                                     >
                                         Agendar consulta
                                     </Link>

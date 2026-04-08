@@ -1,65 +1,28 @@
 import { motion, useScroll, useTransform, useInView } from "framer-motion"
 import { useRef, useEffect, useState } from "react"
-import AnimatedCounter from "../components/AnimatedCounter"
-import Clients from "../components/Clients"
 import { Link } from "react-router-dom"
 
-/*fondo estrellado animado*/
-function ParticleCanvas() {
-    const canvasRef = useRef(null)
+function AnimatedCounter({ end, duration = 1.8 }) {
+    const [count, setCount] = useState(0)
+    const ref = useRef(null)
+    const inView = useInView(ref, { once: true })
     useEffect(() => {
-        const canvas = canvasRef.current
-        const ctx = canvas.getContext("2d")
-        let animId
-        const resize = () => {
-            canvas.width = window.innerWidth
-            canvas.height = window.innerHeight
-        }
-        resize()
-        window.addEventListener("resize", resize)
-
-        const particles = Array.from({ length: 90 }, () => ({
-            x: Math.random() * canvas.width,
-            y: Math.random() * canvas.height,
-            r: Math.random() * 1.4 + 0.3,
-            dx: (Math.random() - 0.5) * 0.35,
-            dy: (Math.random() - 0.5) * 0.35,
-            alpha: Math.random() * 0.6 + 0.2,
-        }))
-
-        const draw = () => {
-            ctx.clearRect(0, 0, canvas.width, canvas.height)
-            particles.forEach((p) => {
-                ctx.beginPath()
-                ctx.arc(p.x, p.y, p.r, 0, Math.PI * 2)
-                ctx.fillStyle = `rgba(148,180,255,${p.alpha})`
-                ctx.fill()
-                p.x += p.dx
-                p.y += p.dy
-                if (p.x < 0 || p.x > canvas.width) p.dx *= -1
-                if (p.y < 0 || p.y > canvas.height) p.dy *= -1
-            })
-            animId = requestAnimationFrame(draw)
-        }
-        draw()
-        return () => {
-            cancelAnimationFrame(animId)
-            window.removeEventListener("resize", resize)
-        }
-    }, [])
-    return (
-        <canvas
-            ref={canvasRef}
-            className="fixed inset-0 w-full h-full pointer-events-none"
-            style={{ zIndex: 0 }}
-        />
-    )
+        if (!inView) return
+        let start = 0
+        const step = end / (duration * 60)
+        const timer = setInterval(() => {
+            start += step
+            if (start >= end) { setCount(end); clearInterval(timer) }
+            else setCount(Math.floor(start))
+        }, 1000 / 60)
+        return () => clearInterval(timer)
+    }, [inView, end, duration])
+    return <span ref={ref}>{count}</span>
 }
 
-/*anima cada letra en hero*/
-function SplitReveal({ text, className, delay = 0 }) {
+function SplitReveal({ text, className, delay = 0, style }) {
     return (
-        <span className={className} style={{ display: "inline-block" }}>
+        <span className={className} style={{ display: "inline-block", ...style }}>
             {text.split("").map((ch, i) => (
                 <motion.span
                     key={i}
@@ -75,7 +38,6 @@ function SplitReveal({ text, className, delay = 0 }) {
     )
 }
 
-/*STAT CARD*/
 function StatCard({ num, label, i }) {
     const ref = useRef(null)
     const inView = useInView(ref, { once: true, margin: "-80px" })
@@ -87,22 +49,25 @@ function StatCard({ num, label, i }) {
             transition={{ delay: i * 0.15, duration: 0.7, ease: [0.22, 1, 0.36, 1] }}
             className="relative group"
         >
-            {/* Glow border */}
-            <div className="absolute -inset-px rounded-2xl bg-gradient-to-br from-blue-400/40 via-transparent to-indigo-500/30 opacity-0 group-hover:opacity-100 transition-opacity duration-500" />
-            <div className="relative bg-white/[0.04] border border-white/10 backdrop-blur-md rounded-2xl p-8 text-center overflow-hidden">
-                {/* Inner shine */}
-                <div className="absolute inset-0 bg-gradient-to-br from-white/5 to-transparent pointer-events-none" />
-                <div className="absolute -top-10 -right-10 w-32 h-32 bg-blue-500/10 rounded-full blur-2xl group-hover:bg-blue-400/20 transition-all duration-700" />
-                <h2 className="text-6xl font-black text-transparent bg-clip-text bg-gradient-to-b from-white to-blue-300">
+            <div className="absolute -inset-px rounded-2xl opacity-0 group-hover:opacity-100 transition-opacity duration-500"
+                style={{ background: "linear-gradient(135deg, rgba(0,180,216,0.15) 0%, transparent 60%, rgba(10,27,92,0.1) 100%)" }} />
+            <div className="relative rounded-2xl p-8 text-center overflow-hidden bg-white shadow-[0_8px_30px_rgb(0,0,0,0.04)]"
+                style={{ border: "1px solid rgba(0,180,216,0.1)" }}>
+                <div className="absolute inset-0 pointer-events-none"
+                    style={{ background: "linear-gradient(135deg, rgba(0,180,216,0.02) 0%, transparent 60%)" }} />
+                <div className="absolute -top-10 -right-10 w-32 h-32 rounded-full blur-2xl transition-all duration-700"
+                    style={{ background: "rgba(0,180,216,0.15)" }} />
+                <h2 className="text-6xl font-black"
+                    style={{ background: "linear-gradient(180deg, #0a1b5c 0%, #00b4d8 100%)", WebkitBackgroundClip: "text", WebkitTextFillColor: "transparent", backgroundClip: "text" }}>
                     <AnimatedCounter end={num} />+
                 </h2>
-                <p className="mt-3 text-sm uppercase tracking-widest text-blue-300/70 font-medium">{label}</p>
+                <p className="mt-3 text-sm uppercase tracking-widest font-semibold"
+                    style={{ color: "#475569" }}>{label}</p>
             </div>
         </motion.div>
     )
 }
 
-/*SERVICE CARD */
 const services = [
     {
         icon: "◈",
@@ -132,12 +97,17 @@ function ServiceCard({ s, i }) {
             transition={{ delay: i * 0.12, duration: 0.8, ease: [0.22, 1, 0.36, 1] }}
             className="group relative"
         >
-            <div className="absolute -inset-px rounded-3xl opacity-0 group-hover:opacity-100 transition-all duration-700 bg-gradient-to-br from-blue-500/30 via-indigo-500/20 to-transparent blur-sm" />
-            <div className="relative h-full bg-white/[0.03] hover:bg-white/[0.07] border border-white/8 hover:border-blue-400/30 rounded-3xl p-8 transition-all duration-500 cursor-default">
-                <span className="text-4xl text-blue-400 block mb-5">{s.icon}</span>
-                <h3 className="text-xl font-bold text-white mb-3 tracking-tight">{s.title}</h3>
-                <p className="text-white/50 text-sm leading-relaxed">{s.desc}</p>
-                <div className="mt-6 flex items-center gap-2 text-blue-400 text-xs uppercase tracking-widest font-semibold opacity-0 group-hover:opacity-100 transition-opacity duration-300">
+            <div className="absolute -inset-px rounded-3xl opacity-0 group-hover:opacity-100 transition-all duration-700 blur-sm"
+                style={{ background: "linear-gradient(135deg, rgba(0,180,216,0.15) 0%, rgba(10,27,92,0.05) 50%, transparent 100%)" }} />
+            <div className="relative h-full rounded-3xl p-8 transition-all duration-500 cursor-default bg-white shadow-[0_4px_20px_rgb(0,0,0,0.03)] group-hover:shadow-[0_8px_30px_rgb(0,0,0,0.08)]"
+                style={{
+                    border: "1px solid rgba(0,0,0,0.05)",
+                }}>
+                <span className="text-4xl block mb-5" style={{ color: "#00b4d8" }}>{s.icon}</span>
+                <h3 className="text-xl font-bold mb-3 tracking-tight" style={{ color: "#0a1b5c" }}>{s.title}</h3>
+                <p className="text-sm leading-relaxed" style={{ color: "#475569" }}>{s.desc}</p>
+                <div className="mt-6 flex items-center gap-2 text-xs uppercase tracking-widest font-semibold opacity-0 group-hover:opacity-100 transition-opacity duration-300"
+                    style={{ color: "#00b4d8" }}>
                     <span>Explorar</span>
                     <span>→</span>
                 </div>
@@ -146,7 +116,6 @@ function ServiceCard({ s, i }) {
     )
 }
 
-/*MAIN COMPONENT*/
 export default function Home() {
     const heroRef = useRef(null)
     const { scrollYProgress } = useScroll({ target: heroRef, offset: ["start start", "end start"] })
@@ -155,94 +124,94 @@ export default function Home() {
 
     return (
         <div
-            className="relative min-h-screen text-white overflow-hidden"
+            className="relative min-h-screen overflow-hidden text-slate-800"
             style={{
-                background: "linear-gradient(135deg, #020818 0%, #040f2a 40%, #030b1f 70%, #050a18 100%)",
+                background: "linear-gradient(135deg, #ffffff 0%, #f4f7fb 50%, #ffffff 100%)",
                 fontFamily: "'Sora', 'DM Sans', sans-serif",
             }}
         >
-            {/* Google Fonts */}
             <style>{`
-        @import url('https://fonts.googleapis.com/css2?family=Sora:wght@300;400;600;700;800;900&family=DM+Sans:ital,wght@0,300;0,400;1,300&display=swap');
-        body { background: #020818; }
-        .text-gradient-blue {
-          background: linear-gradient(135deg, #60a5fa 0%, #818cf8 50%, #a78bfa 100%);
-          -webkit-background-clip: text;
-          -webkit-text-fill-color: transparent;
-          background-clip: text;
-        }
-        .noise::after {
-          content: '';
-          position: absolute;
-          inset: 0;
-          background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 256 256' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='noise'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23noise)' opacity='0.04'/%3E%3C/svg%3E");
-          pointer-events: none;
-          z-index: 1;
-          border-radius: inherit;
-        }
-        .line-clamp { overflow: hidden; display: -webkit-box; -webkit-line-clamp: 3; -webkit-box-orient: vertical; }
-      `}</style>
+                @import url('https://fonts.googleapis.com/css2?family=Sora:wght@300;400;600;700;800;900&family=DM+Sans:ital,wght@0,300;0,400;1,300&display=swap');
+                body { background: #ffffff; margin: 0; }
+            `}</style>
 
-            <ParticleCanvas />
-
+            {/* Ambient blobs — brand colors ajustados para fondo claro */}
             <div className="fixed inset-0 pointer-events-none overflow-hidden" style={{ zIndex: 0 }}>
                 <div style={{
-                    position: "absolute", top: "-20%", left: "-10%",
+                    position: "absolute", top: "-15%", left: "-5%",
                     width: 700, height: 700,
-                    background: "radial-gradient(circle, rgba(59,130,246,0.12) 0%, transparent 70%)",
+                    background: "radial-gradient(circle, rgba(0,180,216,0.08) 0%, transparent 70%)",
                     borderRadius: "50%", filter: "blur(40px)",
                 }} />
                 <div style={{
-                    position: "absolute", top: "30%", right: "-15%",
+                    position: "absolute", top: "20%", right: "-10%",
                     width: 600, height: 600,
-                    background: "radial-gradient(circle, rgba(99,102,241,0.10) 0%, transparent 70%)",
+                    background: "radial-gradient(circle, rgba(10,27,92,0.04) 0%, transparent 70%)",
                     borderRadius: "50%", filter: "blur(60px)",
                 }} />
                 <div style={{
-                    position: "absolute", bottom: "-10%", left: "20%",
+                    position: "absolute", bottom: "-10%", left: "15%",
                     width: 500, height: 500,
-                    background: "radial-gradient(circle, rgba(139,92,246,0.08) 0%, transparent 70%)",
+                    background: "radial-gradient(circle, rgba(0,180,216,0.06) 0%, transparent 70%)",
                     borderRadius: "50%", filter: "blur(50px)",
                 }} />
             </div>
 
+            {/* Subtle grid */}
+            <svg className="fixed inset-0 w-full h-full pointer-events-none" style={{ opacity: 0.2, zIndex: 0 }} xmlns="http://www.w3.org/2000/svg">
+                <defs>
+                    <pattern id="home-grid" width="48" height="48" patternUnits="userSpaceOnUse">
+                        <path d="M 48 0 L 0 0 0 48" fill="none" stroke="rgba(10,27,92,0.05)" strokeWidth="1" />
+                    </pattern>
+                </defs>
+                <rect width="100%" height="100%" fill="url(#home-grid)" />
+            </svg>
+
             <div className="relative" style={{ zIndex: 2 }}>
 
-                {/*HERO*/}
+                {/* HERO */}
                 <section
                     ref={heroRef}
                     className="relative min-h-screen flex flex-col justify-center items-center px-6 pt-20"
                 >
-                    {/* Eyebrow */}
                     <motion.div
                         initial={{ opacity: 0, y: -20 }}
                         animate={{ opacity: 1, y: 0 }}
                         transition={{ delay: 0.2, duration: 0.7 }}
                         className="mb-2 flex items-center gap-3"
                     >
-                        <div className="h-px w-10 bg-blue-400/60" />
-                        <span className="text-xs uppercase tracking-[0.3em] text-blue-400/80 font-medium">
+                        <div className="h-px w-10" style={{ background: "rgba(0,180,216,0.5)" }} />
+                        <span className="text-xs uppercase tracking-[0.3em] font-semibold" style={{ color: "#00b4d8" }}>
                             Consultoría & Capacitación
                         </span>
-                        <div className="h-px w-10 bg-blue-400/60" />
+                        <div className="h-px w-10" style={{ background: "rgba(0,180,216,0.5)" }} />
                     </motion.div>
 
-                    {/* Main headline */}
                     <motion.div style={{ y: heroY, opacity: heroOpacity }} className="text-center">
                         <h1
                             className="font-black leading-none tracking-tighter select-none"
                             style={{ fontSize: "clamp(3.5rem, 12vw, 9rem)", perspective: "600px" }}
                         >
-                            <SplitReveal text="INTELECTO" className="block text-white" delay={0.3} />
-
+                            <SplitReveal
+                                text="INTELECTO"
+                                delay={0.3}
+                                className="block"
+                                style={{
+                                    background: "linear-gradient(135deg, #0a1b5c 0%, #00b4d8 100%)",
+                                    WebkitBackgroundClip: "text",
+                                    WebkitTextFillColor: "transparent",
+                                    backgroundClip: "text",
+                                }}
+                            />
                         </h1>
 
                         <motion.p
                             initial={{ opacity: 0, y: 30 }}
                             animate={{ opacity: 1, y: 0 }}
                             transition={{ delay: 1.2, duration: 0.8 }}
-                            className="mt-8 text-white/40 text-lg max-w-lg mx-auto leading-relaxed font-light"
-                        >
+                            className="mt-8 text-lg max-w-lg mx-auto font-light text-sky-900"
+/*                             style={{ color: "#475569" }}
+ */                        >
                             Soluciones de consultoría y formación para la
                             transformación de organizaciones e INTELECTO
                             humano.
@@ -256,16 +225,31 @@ export default function Home() {
                         >
                             <Link
                                 to="/servicios"
-                                className="group relative inline-flex items-center gap-2 px-8 py-4 rounded-xl font-semibold text-sm tracking-wide overflow-hidden"
-                                style={{ background: "linear-gradient(135deg, #3b82f6, #6366f1)" }}
+                                className="group relative inline-flex items-center gap-2 px-8 py-4 rounded-xl font-semibold text-sm tracking-wide overflow-hidden text-white"
+                                style={{ background: "linear-gradient(135deg, #0a1b5c, #00b4d8)", boxShadow: "0 4px 15px rgba(0, 180, 216, 0.2)" }}
                             >
                                 <span className="relative z-10">Ver servicios</span>
                                 <span className="relative z-10 group-hover:translate-x-1 transition-transform duration-300">→</span>
-                                <div className="absolute inset-0 bg-white/10 opacity-0 group-hover:opacity-100 transition-opacity duration-300" />
+                                <div className="absolute inset-0 opacity-0 group-hover:opacity-100 transition-opacity duration-300"
+                                    style={{ background: "rgba(255,255,255,0.15)" }} />
                             </Link>
                             <Link
                                 to="/contacto"
-                                className="group inline-flex items-center gap-2 px-8 py-4 rounded-xl font-semibold text-sm tracking-wide border border-white/15 hover:border-blue-400/50 hover:bg-white/5 transition-all duration-300 text-white/70 hover:text-white"
+                                className="group inline-flex items-center gap-2 px-8 py-4 rounded-xl font-semibold text-sm tracking-wide transition-all duration-300 bg-white shadow-sm"
+                                style={{
+                                    border: "1px solid rgba(10,27,92,0.15)",
+                                    color: "#0a1b5c",
+                                }}
+                                onMouseEnter={e => {
+                                    e.currentTarget.style.borderColor = "rgba(0,180,216,0.60)"
+                                    e.currentTarget.style.background = "rgba(0,180,216,0.04)"
+                                    e.currentTarget.style.color = "#00b4d8"
+                                }}
+                                onMouseLeave={e => {
+                                    e.currentTarget.style.borderColor = "rgba(10,27,92,0.15)"
+                                    e.currentTarget.style.background = "#ffffff"
+                                    e.currentTarget.style.color = "#0a1b5c"
+                                }}
                             >
                                 Agendar consulta
                                 <span className="group-hover:translate-x-1 transition-transform duration-300">→</span>
@@ -273,36 +257,39 @@ export default function Home() {
                         </motion.div>
                     </motion.div>
                 </section>
-                {/*CARD */}
+
+                {/* CARD */}
                 <motion.div
                     initial={{ opacity: 0, y: 40 }}
                     animate={{ opacity: 1, y: 0 }}
                     transition={{ delay: 1.7, duration: 0.8, ease: [0.22, 1, 0.36, 1] }}
-                    className="mt-20 w-full max-w-md mx-auto"
+                    className="mt-20 w-full max-w-md mx-auto px-4"
                 >
                     <div className="relative group">
-                        {/* Glow hover */}
-                        <div className="absolute -inset-px rounded-3xl opacity-0 group-hover:opacity-100 transition-all duration-700 bg-gradient-to-br from-indigo-500/25 via-blue-500/10 to-transparent blur-sm" />
+                        <div className="absolute -inset-px rounded-3xl opacity-0 group-hover:opacity-100 transition-all duration-700 blur-sm"
+                            style={{ background: "linear-gradient(135deg, #020c1e 0%, #1e3a8a 40%, #3b82f6 70%, #93c5fd 100%)" }} />
 
-                        <div className="relative bg-white/[0.05] hover:bg-white/[0.06] border border-white/10 hover:border-indigo-400/30 rounded-3xl p-9 transition-all duration-500">
+                        <div className="relative rounded-3xl p-9 transition-all duration-500 bg-white shadow-[0_10px_40px_rgb(0,0,0,0.06)]"
+                            style={{
+                                border: "1px solid rgba(0,0,0,0.05)",
+                            }}>
 
-                            {/* Eyebrow */}
                             <div className="flex items-center gap-3 mb-5">
-                                <div className="h-px w-7 bg-blue-400/50" />
-                                <span className="text-[10px] uppercase tracking-[0.3em] text-blue-400/70 font-medium">
+                                <div className="h-px w-7" style={{ background: "rgba(0,180,216,0.50)" }} />
+                                <span className="text-[10px] uppercase tracking-[0.3em] font-bold"
+                                    style={{ color: "#00b4d8" }}>
                                     Consultoría
                                 </span>
-                                <div className="h-px w-7 bg-blue-400/50" />
+                                <div className="h-px w-7" style={{ background: "rgba(0,180,216,0.50)" }} />
                             </div>
 
-
-
-                            <h3 className="text-xl font-bold text-white tracking-tight leading-snug mb-3">
+                            <h3 className="text-xl font-bold tracking-tight leading-snug mb-3"
+                                style={{ color: "#0a1b5c" }}>
                                 Si se identifica con alguna de estas situaciones, su organización está
                                 lista para una transformación:
                             </h3>
 
-                            <div className="h-px bg-white/8 mb-5" />
+                            <div className="h-px mb-5" style={{ background: "rgba(10,27,92,0.10)" }} />
 
                             {[
                                 { title: "¿Sus líderes apagan incendios en lugar de construir el futuro?" },
@@ -310,32 +297,32 @@ export default function Home() {
                                 { title: "¿Cumple con las normas por evitar multas y no para generar valor?" },
                                 { title: "¿Tiene un equipo con potencial, pero que no logra dar el salto al alto desempeño?" },
                             ].map((item, i) => (
-
                                 <div key={i} className="flex items-start gap-3 mb-3">
-                                    <span className="mt-2 w-1.5 h-1.5 rounded-full bg-indigo-400/70 flex-shrink-0" />
-                                    <p className="text-sm text-white/45 font-light leading-relaxed">
-                                        <span className="text-white/75 font-medium">{item.title}</span>{" "}
-                                        {item.body}
+                                    <span className="mt-2 w-1.5 h-1.5 rounded-full flex-shrink-0"
+                                        style={{ background: "#00b4d8" }} />
+                                    <p className="text-sm font-light leading-relaxed">
+                                        <span className="font-medium" style={{ color: "#475569" }}>{item.title}</span>
                                     </p>
                                 </div>
                             ))}
 
-                            {/* Footer */}
                             <div className="flex items-center justify-between mt-7">
-
                                 <Link
                                     to="/contacto"
-                                    className="group/btn flex items-center gap-2 text-xs uppercase tracking-widest text-blue-300/80 hover:text-blue-200 font-semibold transition-colors duration-300"
+                                    className="flex items-center gap-2 text-xs uppercase tracking-widest font-bold transition-colors duration-300"
+                                    style={{ color: "#0a1b5c" }}
+                                    onMouseEnter={e => e.currentTarget.style.color = "#00b4d8"}
+                                    onMouseLeave={e => e.currentTarget.style.color = "#0a1b5c"}
                                 >
                                     Saber más
-                                    <span className="group-hover/btn:translate-x-1 transition-transform duration-300">→</span>
+                                    <span>→</span>
                                 </Link>
                             </div>
                         </div>
                     </div>
                 </motion.div>
 
-
+                <div style={{ height: "5rem" }} />
             </div>
         </div>
     )

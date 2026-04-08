@@ -1,7 +1,7 @@
 import { useEffect, useState } from "react"
 import AppRouter from "./routes/AppRouter"
 import Loader from "./components/Loader"
-import logo from "./assets/circle.png"
+import logo from "./assets/LogoFinal.png"
 
 function App() {
   const [loading, setLoading] = useState(true)

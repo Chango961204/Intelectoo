@@ -10,7 +10,6 @@ const links = [
     items: [
       { label: "Inicio", to: "/" },
       { label: "Nosotros", to: "/nosotros" },
-      { label: "Catálogo", to: "/catalogo" },
     ],
   },
   {
@@ -67,8 +66,8 @@ export default function Footer() {
       ref={ref}
       style={{
         fontFamily: "'Sora', 'DM Sans', sans-serif",
-        background: "linear-gradient(180deg, #020818 0%, #030c20 100%)",
-        borderTop: "1px solid rgba(148,180,255,0.07)",
+        background: "linear-gradient(180deg, #ffffff 0%, #f4f7fb 100%)",
+        borderTop: "1px solid rgba(148,163,184,0.14)",
         position: "relative",
         overflow: "hidden",
       }}
@@ -82,7 +81,7 @@ export default function Footer() {
           transform: "translateX(-50%)",
           width: 600,
           height: 200,
-          background: "radial-gradient(ellipse, rgba(59,130,246,0.08) 0%, transparent 70%)",
+          background: "radial-gradient(ellipse, rgba(0,180,216,0.10) 0%, transparent 70%)",
           pointerEvents: "none",
         }}
       />
@@ -94,7 +93,7 @@ export default function Footer() {
       >
         <defs>
           <pattern id="footer-grid" width="48" height="48" patternUnits="userSpaceOnUse">
-            <path d="M 48 0 L 0 0 0 48" fill="none" stroke="rgba(148,180,255,1)" strokeWidth="0.5" />
+            <path d="M 48 0 L 0 0 0 48" fill="none" stroke="#00b4d8" strokeWidth="0.5" />
           </pattern>
         </defs>
         <rect width="100%" height="100%" fill="url(#footer-grid)" />
@@ -108,7 +107,7 @@ export default function Footer() {
           animate={inView ? { opacity: 1, y: 0 } : {}}
           transition={{ duration: 0.8, ease: [0.22, 1, 0.36, 1] }}
           className="flex flex-col md:flex-row justify-between items-start md:items-center gap-8 py-12"
-          style={{ borderBottom: "1px solid rgba(255,255,255,0.06)" }}
+          style={{ borderBottom: "1px solid rgba(148,163,184,0.14)" }}
         >
           {/* Brand */}
           <div>
@@ -116,19 +115,14 @@ export default function Footer() {
               <img
                 src={logo}
                 alt="Intelecto"
-                className="h-10 w-auto object-contain"
-                style={{ filter: "brightness(0) invert(1)", opacity: 0.85 }}
+                className="h-40 w-auto object-contain"
+                style={{ opacity: 0.9 }}
               />
-              <span
-                className="text-lg font-black tracking-tight"
-                style={{ color: "rgba(255,255,255,0.9)" }}
-              >
-                INTELECTO
-              </span>
+              
             </Link>
             <p
               className="mt-2 text-sm max-w-xs"
-              style={{ color: "rgba(255,255,255,0.28)", lineHeight: 1.6 }}
+              style={{ color: "#475569", lineHeight: 1.6 }}
             >
               Transformamos organizaciones e intelecto humano.
             </p>
@@ -150,20 +144,24 @@ export default function Footer() {
                 whileTap={{ scale: 0.95 }}
                 className="flex items-center justify-center w-10 h-10 rounded-xl transition-all duration-300"
                 style={{
-                  background: "rgba(255,255,255,0.04)",
-                  border: "1px solid rgba(255,255,255,0.08)",
-                  color: "rgba(255,255,255,0.5)",
+                  background: "rgba(255,255,255,0.78)",
+                  border: "1px solid rgba(148,163,184,0.22)",
+                  color: "#475569",
+                  boxShadow: "0 12px 24px rgba(15,23,42,0.08)",
+                  backdropFilter: "blur(10px)",
                   "--hover-color": s.hoverColor,
                 }}
                 onMouseEnter={(e) => {
                   e.currentTarget.style.background = `${s.hoverColor}22`
                   e.currentTarget.style.borderColor = `${s.hoverColor}44`
                   e.currentTarget.style.color = s.hoverColor
+                  e.currentTarget.style.boxShadow = "0 16px 32px rgba(15,23,42,0.12)"
                 }}
                 onMouseLeave={(e) => {
-                  e.currentTarget.style.background = "rgba(255,255,255,0.04)"
-                  e.currentTarget.style.borderColor = "rgba(255,255,255,0.08)"
-                  e.currentTarget.style.color = "rgba(255,255,255,0.5)"
+                  e.currentTarget.style.background = "rgba(255,255,255,0.78)"
+                  e.currentTarget.style.borderColor = "rgba(148,163,184,0.22)"
+                  e.currentTarget.style.color = "#475569"
+                  e.currentTarget.style.boxShadow = "0 12px 24px rgba(15,23,42,0.08)"
                 }}
               >
                 {s.icon}
@@ -174,7 +172,7 @@ export default function Footer() {
 
         {/* ── MIDDLE: Link columns ── */}
         <div className="grid grid-cols-2 md:grid-cols-3 gap-10 py-12"
-          style={{ borderBottom: "1px solid rgba(255,255,255,0.06)" }}
+          style={{ borderBottom: "1px solid rgba(148,163,184,0.14)" }}
         >
           {links.map((col, ci) => (
             <motion.div
@@ -185,7 +183,7 @@ export default function Footer() {
             >
               <p
                 className="text-xs font-semibold uppercase tracking-widest mb-5"
-                style={{ color: "rgba(148,180,255,0.6)" }}
+                style={{ color: "#00b4d8" }}
               >
                 {col.title}
               </p>
@@ -195,15 +193,15 @@ export default function Footer() {
                     {item.to ? (
                       <Link
                         to={item.to}
-                        className="text-sm transition-colors duration-200 hover:text-white"
-                        style={{ color: "rgba(255,255,255,0.35)" }}
+                        className="text-sm transition-all duration-200 hover:translate-x-1"
+                        style={{ color: "#475569" }}
                       >
                         {item.label}
                       </Link>
                     ) : (
                       <span
                         className="text-sm"
-                        style={{ color: "rgba(255,255,255,0.25)" }}
+                        style={{ color: "#64748b" }}
                       >
                         {item.label}
                       </span>
@@ -224,7 +222,7 @@ export default function Footer() {
         >
           <p
             className="text-xs"
-            style={{ color: "rgba(255,255,255,0.2)" }}
+            style={{ color: "#64748b" }}
           >
             © 2026 INTELECTO. Todos los derechos reservados.
           </p>
@@ -233,14 +231,16 @@ export default function Footer() {
           <div
             className="flex items-center gap-2 px-3 py-1.5 rounded-lg text-xs"
             style={{
-              background: "rgba(255,255,255,0.03)",
-              border: "1px solid rgba(255,255,255,0.06)",
-              color: "rgba(255,255,255,0.2)",
+              background: "rgba(255,255,255,0.78)",
+              border: "1px solid rgba(148,163,184,0.18)",
+              color: "#64748b",
+              boxShadow: "0 12px 24px rgba(15,23,42,0.08)",
+              backdropFilter: "blur(10px)",
             }}
           >
             <span
               className="w-1.5 h-1.5 rounded-full animate-pulse"
-              style={{ background: "#3b82f6" }}
+              style={{ background: "#00b4d8" }}
             />
             Zacatecas, México
           </div>

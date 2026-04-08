@@ -111,8 +111,7 @@ function MVVModal({ item, onClose }) {
                     exit={{ opacity: 0 }}
                     transition={{ duration: 0.3 }}
                     onClick={onClose}
-                    className="fixed inset-0 z-50"
-                    style={{ background: "rgba(2,8,24,0.85)", backdropFilter: "blur(12px)" }}
+                    className="fixed inset-0 z-50 bg-[#020c1e]/90 backdrop-blur-md"
                 />
 
                 {/* Modal Panel */}
@@ -129,9 +128,9 @@ function MVVModal({ item, onClose }) {
                         className="relative w-full max-w-lg rounded-3xl overflow-hidden"
                         style={{
                             pointerEvents: "auto",
-                            background: "linear-gradient(135deg, #0a1628 0%, #070e20 100%)",
-                            border: `1px solid ${item.accent}30`,
-                            boxShadow: `0 0 80px ${item.accent}18, 0 40px 60px rgba(0,0,0,0.6)`,
+                            background: "linear-gradient(135deg, #ffffff 0%, #f8fbff 50%, #eef6fb 100%)",
+                            border: `1px solid ${item.accent}25`,
+                            boxShadow: `0 0 80px ${item.accent}12, 0 30px 60px rgba(15, 23, 42, 0.16)`,
                         }}
                     >
                         {/* Top accent line */}
@@ -150,20 +149,7 @@ function MVVModal({ item, onClose }) {
                             {/* Close button */}
                             <button
                                 onClick={onClose}
-                                className="absolute top-6 right-6 flex items-center justify-center w-9 h-9 rounded-xl transition-all duration-200"
-                                style={{
-                                    background: "rgba(255,255,255,0.05)",
-                                    border: "1px solid rgba(255,255,255,0.08)",
-                                    color: "rgba(255,255,255,0.4)",
-                                }}
-                                onMouseEnter={e => {
-                                    e.currentTarget.style.background = "rgba(255,255,255,0.09)"
-                                    e.currentTarget.style.color = "#fff"
-                                }}
-                                onMouseLeave={e => {
-                                    e.currentTarget.style.background = "rgba(255,255,255,0.05)"
-                                    e.currentTarget.style.color = "rgba(255,255,255,0.4)"
-                                }}
+                                className="absolute top-6 right-6 flex items-center justify-center w-9 h-9 rounded-xl transition-all duration-200 bg-white border border-slate-200 text-slate-500 hover:bg-slate-50 hover:text-slate-800"
                             >
                                 <X size={16} />
                             </button>
@@ -187,23 +173,14 @@ function MVVModal({ item, onClose }) {
                                     >
                                         {item.label}
                                     </span>
-                                    <h3
-                                        className="font-black text-xl tracking-tight"
-                                        style={{ color: "rgba(255,255,255,0.95)" }}
-                                    >
+                                    <h3 className="font-black text-xl tracking-tight text-slate-900">
                                         {item.title}
                                     </h3>
                                 </div>
                             </div>
 
                             {/* Intro */}
-                            <p
-                                className="text-sm leading-relaxed mb-8 pb-8"
-                                style={{
-                                    color: "rgba(255,255,255,0.45)",
-                                    borderBottom: "1px solid rgba(255,255,255,0.06)",
-                                }}
-                            >
+                            <p className="text-sm leading-relaxed mb-8 pb-8 text-slate-600 border-b border-slate-200">
                                 {item.modalContent.intro}
                             </p>
 
@@ -224,18 +201,14 @@ function MVVModal({ item, onClose }) {
                                             {i + 1}
                                         </div>
                                         <div>
-                                            <p
-                                                className="font-semibold text-sm mb-1"
-                                                style={{ color: "rgba(255,255,255,0.85)" }}
-                                            >
+                                            <p className="font-semibold text-sm mb-1 text-slate-900">
                                                 {point.title}
                                             </p>
-                                            <p
-                                                className="text-sm leading-relaxed"
-                                                style={{ color: "rgba(255,255,255,0.38)" }}
-                                            >
-                                                {point.desc}
-                                            </p>
+                                            {point.desc && (
+                                                <p className="text-sm leading-relaxed text-slate-600">
+                                                    {point.desc}
+                                                </p>
+                                            )}
                                         </div>
                                     </motion.div>
                                 ))}
@@ -243,7 +216,7 @@ function MVVModal({ item, onClose }) {
 
                             {/* Footer */}
                             <div className="mt-9 flex items-center justify-between">
-                                <span className="text-xs" style={{ color: "rgba(255,255,255,0.2)" }}>
+                                <span className="text-xs text-slate-400">
                                     INTELECTO
                                 </span>
                                 <button
@@ -254,8 +227,6 @@ function MVVModal({ item, onClose }) {
                                         border: `1px solid ${item.accent}30`,
                                         color: item.accent,
                                     }}
-                                    onMouseEnter={e => { e.currentTarget.style.background = `${item.accent}28` }}
-                                    onMouseLeave={e => { e.currentTarget.style.background = `${item.accent}18` }}
                                 >
                                     Cerrar
                                 </button>
@@ -287,7 +258,7 @@ export default function Servicios() {
         <div
             className="relative min-h-screen text-white"
             style={{
-                background: "linear-gradient(135deg, #020818 0%, #040f2a 40%, #030b1f 70%, #050a18 100%)",
+                background: "linear-gradient(135deg, #ffffff 0%, #f4f7fb 50%, #ffffff 100%)",
                 fontFamily: "'Sora', 'DM Sans', sans-serif",
             }}
         >
@@ -298,15 +269,15 @@ export default function Servicios() {
 
             {/* Ambient blobs */}
             <div className="fixed inset-0 pointer-events-none overflow-hidden" style={{ zIndex: 0 }}>
-                <div style={{ position: "absolute", top: "5%", left: "-15%", width: 700, height: 700, background: "radial-gradient(circle, rgba(99,102,241,0.09) 0%, transparent 70%)", borderRadius: "50%", filter: "blur(60px)" }} />
-                <div style={{ position: "absolute", bottom: "0%", right: "-10%", width: 500, height: 500, background: "radial-gradient(circle, rgba(59,130,246,0.08) 0%, transparent 70%)", borderRadius: "50%", filter: "blur(50px)" }} />
+                <div style={{ position: "absolute", top: "5%", left: "-15%", width: 700, height: 700, background: "radial-gradient(circle, rgba(0,119,182,0.10) 0%, transparent 70%)", borderRadius: "50%", filter: "blur(60px)" }} />
+                <div style={{ position: "absolute", bottom: "0%", right: "-10%", width: 500, height: 500, background: "radial-gradient(circle, rgba(0,180,216,0.08) 0%, transparent 70%)", borderRadius: "50%", filter: "blur(50px)" }} />
             </div>
 
             {/* Grid pattern */}
             <svg className="fixed inset-0 w-full h-full pointer-events-none" style={{ opacity: 0.025, zIndex: 0 }} xmlns="http://www.w3.org/2000/svg">
                 <defs>
                     <pattern id="nos-grid" width="48" height="48" patternUnits="userSpaceOnUse">
-                        <path d="M 48 0 L 0 0 0 48" fill="none" stroke="rgba(148,180,255,1)" strokeWidth="0.5" />
+                        <path d="M 48 0 L 0 0 0 48" fill="none" stroke="#00b4d8" strokeWidth="0.5" />
                     </pattern>
                 </defs>
                 <rect width="100%" height="100%" fill="url(#nos-grid)" />
@@ -322,11 +293,11 @@ export default function Servicios() {
                         transition={{ duration: 0.6 }}
                         className="inline-flex items-center gap-3 mb-8"
                     >
-                        <div className="h-px w-10" style={{ background: "rgba(148,180,255,0.5)" }} />
-                        <span className="text-xs uppercase tracking-widest font-medium" style={{ color: "rgba(148,180,255,0.7)" }}>
+                        <div className="h-px w-10 bg-[#00b4d8]/50" />
+                        <span className="text-xs uppercase tracking-widest font-medium" style={{ color: "#00b4d8" }}>
                             Servicios
                         </span>
-                        <div className="h-px w-10" style={{ background: "rgba(148,180,255,0.5)" }} />
+                        <div className="h-px w-10 bg-[#00b4d8]/50" />
                     </motion.div>
 
                     <motion.h1
@@ -336,8 +307,8 @@ export default function Servicios() {
                         className="font-black tracking-tight leading-none"
                         style={{ fontSize: "clamp(2.8rem, 8vw, 6rem)" }}
                     >
-                        Modelo{" "}
-                        <span style={{ background: "linear-gradient(135deg, #60a5fa, #818cf8, #a78bfa)", WebkitBackgroundClip: "text", WebkitTextFillColor: "transparent", backgroundClip: "text" }}>
+                        <span className="text-blue-950">Modelo </span>
+                        <span style={{ background: "linear-gradient(135deg, #000000, #00b4d8, #0077b6)", WebkitBackgroundClip: "text", WebkitTextFillColor: "transparent", backgroundClip: "text" }}>
                             Intelecto
                         </span>
                     </motion.h1>
@@ -346,15 +317,14 @@ export default function Servicios() {
                         initial={{ opacity: 0, y: 20 }}
                         animate={{ opacity: 1, y: 0 }}
                         transition={{ delay: 0.3, duration: 0.7 }}
-                        className="mt-6 text-lg max-w-lg mx-auto font-light"
-                        style={{ color: "rgba(255,255,255,0.35)" }}
+                        className="mt-6 text-lg max-w-lg mx-auto font-light text-sky-900"
                     >
                         Integra cinco pilares estratégicos que permiten alinear
                         la dirección, fortalecer el liderazgo, desarrollar la cultura
                         organizacional, potenciar el talento y optimizar la
                         operación.
                     </motion.p>
-                    <p>
+                    <p className="mt-4 text-base max-w-2xl mx-auto font-light text-sky-900">
                         Todo el modelo se encuentra respaldado por el Sistema
                         Intelecto Compliance 360°
                         , asegurando organizaciones
@@ -367,11 +337,11 @@ export default function Servicios() {
                     <div className="max-w-6xl mx-auto">
 
                         <div className="flex items-center gap-4 mb-14">
-                            <div className="h-px flex-1" style={{ background: "rgba(255,255,255,0.06)" }} />
-                            <span className="text-xs uppercase tracking-widest font-medium" style={{ color: "rgba(255,255,255,0.2)" }}>
+                            <div className="h-px flex-1 bg-[#00b4d8]/10" />
+                            <span className="text-xs uppercase tracking-widest font-medium" style={{ color: "#00b4d8" }}>
                                 Modelo intelecto
                             </span>
-                            <div className="h-px flex-1" style={{ background: "rgba(255,255,255,0.06)" }} />
+                            <div className="h-px flex-1 bg-[#00b4d8]/10" />
                         </div>
 
                         <div className="grid md:grid-cols-3 gap-5">
@@ -389,15 +359,9 @@ export default function Servicios() {
                                         style={{ background: `linear-gradient(135deg, ${item.accent}33, transparent)`, filter: "blur(1px)" }}
                                     />
 
-                                    <div
-                                        className="relative h-full rounded-2xl p-8 overflow-hidden flex flex-col"
-                                        style={{ background: "rgba(255,255,255,0.03)", border: "1px solid rgba(255,255,255,0.07)" }}
-                                    >
+                                    <div className="relative h-full rounded-2xl p-8 overflow-hidden flex flex-col bg-white/80 border border-slate-200 shadow-[0_18px_45px_rgba(15,23,42,0.08)] backdrop-blur-sm">
                                         {/* Inner shine */}
-                                        <div
-                                            className="absolute inset-0 pointer-events-none"
-                                            style={{ background: "linear-gradient(135deg, rgba(255,255,255,0.03) 0%, transparent 60%)" }}
-                                        />
+                                        <div className="absolute inset-0 pointer-events-none bg-gradient-to-br from-white/70 via-white/30 to-transparent" />
 
                                         {/* Icon */}
                                         <div
@@ -410,23 +374,14 @@ export default function Servicios() {
                                         {/* Content */}
                                         <div className="relative z-10 flex-1">
                                             <span
-                                                className="text-xs uppercase tracking-widest font-semibold mb-2 block"
-                                                style={{ color: item.accent, opacity: 0.7 }}
+                                                className="text-xs uppercase tracking-widest font-semibold mb-2 block opacity-90"
+                                                style={{ color: item.accent }}
                                             >
                                                 {item.label}
                                             </span>
-                                            <h3
-                                                className="font-bold text-lg mb-3"
-                                                style={{ color: "rgba(255,255,255,0.9)" }}
-                                            >
+                                            <h3 className="font-bold text-lg mb-3 text-slate-900">
                                                 {item.title}
                                             </h3>
-                                            <p
-                                                className="text-sm leading-relaxed"
-                                                style={{ color: "rgba(255,255,255,0.38)" }}
-                                            >
-                                                {item.text}
-                                            </p>
                                         </div>
 
                                         {/* Ver más button */}
@@ -468,15 +423,15 @@ export default function Servicios() {
                             transition={{ duration: 0.8 }}
                         >
                             <h2
-                                className="font-black tracking-tight leading-none mb-5"
+                                className="font-black tracking-tight leading-none mb-5 text-blue-950"
                                 style={{ fontSize: "clamp(1.8rem, 5vw, 3rem)" }}
                             >
                                 ¿Trabajamos{" "}
-                                <span style={{ background: "linear-gradient(135deg, #60a5fa, #a78bfa)", WebkitBackgroundClip: "text", WebkitTextFillColor: "transparent", backgroundClip: "text" }}>
+                                <span style={{ background: "linear-gradient(135deg, #000000, #00b4d8, #0077b6)", WebkitBackgroundClip: "text", WebkitTextFillColor: "transparent", backgroundClip: "text" }}>
                                     juntos?
                                 </span>
                             </h2>
-                            <p className="mb-10 font-light" style={{ color: "rgba(255,255,255,0.35)" }}>
+                            <p className="mb-10 font-light text-sky-900">
                                 Conoce todo lo que podemos hacer por tu organización.
                             </p>
                             <div className="flex flex-col sm:flex-row gap-4 justify-center">
@@ -493,16 +448,7 @@ export default function Servicios() {
                                 </Link>
                                 <Link
                                     to="/contacto"
-                                    className="inline-flex items-center gap-2 px-8 py-4 rounded-xl font-semibold text-sm transition-all duration-300"
-                                    style={{ border: "1px solid rgba(255,255,255,0.1)", color: "rgba(255,255,255,0.5)" }}
-                                    onMouseEnter={e => {
-                                        e.currentTarget.style.borderColor = "rgba(99,102,241,0.4)"
-                                        e.currentTarget.style.color = "#fff"
-                                    }}
-                                    onMouseLeave={e => {
-                                        e.currentTarget.style.borderColor = "rgba(255,255,255,0.1)"
-                                        e.currentTarget.style.color = "rgba(255,255,255,0.5)"
-                                    }}
+                                    className="inline-flex items-center gap-2 px-8 py-4 rounded-xl font-semibold text-sm transition-all duration-300 border border-[#00b4d8]/15 text-blue-900/90 hover:border-[#00b4d8]/45 hover:text-blue-950 hover:bg-[#00b4d8]/5"
                                 >
                                     Contáctanos
                                 </Link>
