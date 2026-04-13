@@ -266,7 +266,7 @@ export default function Home() {
                     className="mt-20 w-full max-w-md mx-auto px-4"
                 >
                     <div className="relative group">
-                        <div className="absolute -inset-px rounded-3xl opacity-0 group-hover:opacity-100 transition-all duration-700 blur-sm"
+                        <div className="absolute -inset-px rounded-3xl opacity-0 group-hover:opacity-100 transition-all duration-1000 blur-sm"
                             style={{ background: "linear-gradient(135deg, #020c1e 0%, #1e3a8a 40%, #3b82f6 70%, #93c5fd 100%)" }} />
 
                         <div className="relative rounded-3xl p-9 transition-all duration-500 bg-white shadow-[0_10px_40px_rgb(0,0,0,0.06)]"

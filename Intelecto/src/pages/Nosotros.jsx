@@ -192,7 +192,7 @@ export default function Nosotros() {
 
             <div className="relative z-10">
                 {/* HERO */}
-                <section className="pt-40 pb-20 px-6 text-center">
+                <section className="pt-40 pb-2  0 px-6 text-center ">
                     <motion.div
                         initial={{ opacity: 0, y: -20 }}
                         animate={{ opacity: 1, y: 0 }}
@@ -251,7 +251,7 @@ export default function Nosotros() {
                                     className="group relative"
                                 >
                                     <div
-                                        className="absolute -inset-px rounded-2xl opacity-0 group-hover:opacity-100 transition-opacity duration-500 blur-[1px]"
+                                        className="absolute -inset-px rounded-2xl opacity-0 group-hover:opacity-100 transition-opacity duration-500 blur-[1px] "
                                         style={{ background: `linear-gradient(135deg, ${item.accent}30, transparent)` }}
                                     />
 
