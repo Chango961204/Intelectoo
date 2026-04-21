@@ -92,11 +92,11 @@ const mvv = [
     {
         icon: <RefreshCw size={22} />,
         label: "Compliance 360°.",
-        title: "Diseñamos e implementamos Sistemas Integrales de Cumplimiento, Ética y Gestión de Riesgos para proveedores estratégicos.",
+        title: "Diseñamos e implementamos Sistemas Integrales de Cumplimiento, Ética y Gestión de Riesgos.",
         accent: "#a78bfa",
         modalContent: {
             intro: "Alineando a estándares internacionales; que te permiten:",
-            openingStatement: "Implementamos mecanismos de cumplimiento que protegen tu negocio y resguardan su reputación.",
+
             points: [
                 { title: "Cumplimiento proporcional al tamaño de tu empresa." },
                 { title: "Cumplir con auditorías y requerimientos de clientes." },
@@ -235,7 +235,7 @@ function MVVModal({ item, onClose }) {
                             {item.modalContent.closingStatement && (
                                 <div className="mt-8 pt-8 border-t border-slate-200">
                                     <p className="text-sm italic text-slate-600 leading-relaxed">
-                                        <span className="font-semibold text-slate-900">Cómo lo vendes: </span>
+                                        <span className="font-semibold text-slate-900"></span>
                                         {item.modalContent.closingStatement}
                                     </p>
                                 </div>

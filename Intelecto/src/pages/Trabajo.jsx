@@ -126,17 +126,8 @@ function MVVModal({ item, onClose }) {
 
                 <div className="space-y-5">
                   {item.modalContent.points.map((point, i) => (
-                    <motion.div
-                      key={i}
-                      initial={{ opacity: 0, x: -16 }}
-                      animate={{ opacity: 1, x: 0 }}
-                      transition={{ delay: 0.15 + i * 0.08, duration: 0.5, ease: [0.22, 1, 0.36, 1] }}
-                      className="flex gap-4"
-                    >
-                      <div
-                        className="flex-shrink-0 w-7 h-7 rounded-lg flex items-center justify-center text-xs font-bold mt-0.5"
-                        style={{ background: `${item.accent}15`, color: item.accent }}
-                      >
+                    <motion.div key={i} initial={{ opacity: 0, x: -16 }} animate={{ opacity: 1, x: 0 }} transition={{ delay: 0.15 + i * 0.08, duration: 0.5, ease: [0.22, 1, 0.36, 1] }} className="flex gap-4">
+                      <div className="flex-shrink-0 w-7 h-7 rounded-lg flex items-center justify-center text-xs font-bold mt-0.5" style={{ background: `${item.accent}15`, color: item.accent }} >
                         {i + 1}
                       </div>
                       <div>

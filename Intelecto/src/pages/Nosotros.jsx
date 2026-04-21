@@ -22,9 +22,8 @@ const mvv = [
         title: "Ser un referente en México en transformación organizacional",
         accent: "#00b4d8",
         modalContent: {
-            intro: "Visualizamos un México empresarial más competitivo y humano.",
             points: [
-                { title: "Sólidas, éticas y de alto desempeño mediante un modelo propio de intervención e impacto comprobable" },
+                { title: "Reconocido por desarrollar organizaciones sólidas, éticas y de alto desempeño mediante un modelo propio de intervención e impacto comprobable." },
             ],
         },
     },
