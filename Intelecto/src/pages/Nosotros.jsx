@@ -19,7 +19,7 @@ const mvv = [
     {
         icon: <Eye size={22} />,
         label: "Visión",
-        title: "Ser el referente en México en transformación organizacional",
+        title: "Ser un referente en México en transformación organizacional",
         accent: "#00b4d8",
         modalContent: {
             intro: "Visualizamos un México empresarial más competitivo y humano.",

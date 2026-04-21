@@ -1,7 +1,7 @@
 import { motion, useInView, AnimatePresence } from "framer-motion";
 import { useRef, useState } from "react";
 import { Link } from "react-router-dom";
-import {  Palette, CircleFadingArrowUp, X, BookSearch, Gauge, ListCheck } from "lucide-react";
+import { Palette, CircleFadingArrowUp, X, BookSearch, Gauge, ListCheck, Subtitles } from "lucide-react";
 
 const mvv = [
   {
@@ -12,8 +12,9 @@ const mvv = [
     modalContent: {
       intro: "Nuestra misión es el corazón de todo lo que hacemos.",
       points: [
-        { title: "Desarrollamos organizaciones extraordinarias alineando estrategia, liderazgo y cultura, mediante soluciones de alto impacto e implementación real, integrando un enfoque de Compliance 360° que garantiza sostenibilidad, integridad y resultados." },
+        { title: "Analizamos a profundidad la organización desde cinco dimensiones clave: estrategia, liderazgo, cultura, talento y operación. Identificamos brechas críticas, riesgos y oportunidades reales de mejora.." },
       ],
+      closingStatement: "Claridad estratégica sobre qué cambiar, por qué y con qué impacto.",
     },
   },
   {
@@ -22,10 +23,11 @@ const mvv = [
     title: "Diseño",
     accent: "#00b4d8",
     modalContent: {
-      intro: "Visualizamos un México empresarial más competitivo y humano.",
+      intro: "Diseñamos soluciones a la medida, no aplicamos fórmulas genéricas.",
       points: [
-        { title: "Sólidas, éticas y de alto desempeño mediante un modelo propio de intervención e impacto comprobable" },
+        { title: "Traducimos el diagnóstico en un modelo de intervención a la medida. Definimos soluciones integrales que pueden incluir rediseño organizacional, sistemas de gestión, procesos y programas de desarrollo." }
       ],
+      closingStatement: " Una ruta clara, estructurada y alineada a resultados de negocio.",
     },
   },
   {
@@ -34,37 +36,46 @@ const mvv = [
     title: "Desarrollo",
     accent: "#0096c7",
     modalContent: {
-      intro: "Nuestros valores no son un cartel en la pared, son decisiones diarias.",
+      intro: "Construimos los elementos necesarios para ejecutar la transformación:",
       points: [
-        { title: "Excelencia profesional", desc: "Diseñamos e implementamos soluciones con alto nivel técnico y estratégico." },
-        { title: "Integridad organizacional", desc: "Actuamos con ética, promoviendo culturas basadas en cumplimiento y responsabilidad." },
-        { title: "Transformación consciente", desc: "Impulsamos cambios profundos en las personas y en la organización." },
-        { title: "Enfoque en resultados", desc: "Trabajamos para generar impacto real y medible en las organizaciones." },
+        { title: "Modelos de trabajo", },
+        { title: "Procesos y políticas", desc: "Actuamos con ética, promoviendo culturas basadas en cumplimiento y responsabilidad." },
+        { title: "Herramientas de gestión", },
+        { title: "Programas de capacitación y desarrollo del talento", },
       ],
+      closingStatement: "Soluciones totalmente adaptadas y listas para implementarse.",
     },
   },
-   {
+  {
     icon: <ListCheck size={22} />,
     label: "IV",
     title: "Implementación",
     accent: "#0077b6",
     modalContent: {
-      intro: "Nuestra misión es el corazón de todo lo que hacemos.",
+      intro: "Acompañamos a la organización en la ejecución. No solo capacitamos: intervenimos en la operación para asegurar adopción, disciplina y cambio de comportamiento.",
       points: [
-        { title: "Desarrollamos organizaciones extraordinarias alineando estrategia, liderazgo y cultura, mediante soluciones de alto impacto e implementación real, integrando un enfoque de Compliance 360° que garantiza sostenibilidad, integridad y resultados." },
+        { title: "Programas ejecutivos", desc: "Procesos estructurados de desarrollo alineados a objetivos estratégicos, dirigidos a líderes y equipos clave." },
+        { title: "Talleres de alto impacto", desc: "Sesiones dinámicas y prácticas enfocadas en generar consiencia y accion inmediata." },
+        { title: "Programas de desarrollo humano y liderazgo personal:", desc: "Mujeres líderes en armonía. Domina tu agenda, transforma tu vida. Emprendimiento y profesionalización. " },
+        { title: "Acompañamiento en campo", desc: "Intervencion directa en la operaciòn para asegurar la correcta aplicaciòn de procesos y herramientas." },
+        { title: "Coaching a líderes", desc: "Proceso personalizado para fortalecer habilidades de liderazgo, toma de decisiones y gestión de equipos." },
+        { title: "Implementación de sistemas.", desc: "Diseño y puesta en marcha de modelos, procesos y herramientas que aseguran orden, cumplimiento y resultados sostenibles." }
+
       ],
+      closingStatement: "Cambios visibles en la forma de trabajar, liderar y operar.",
     },
   },
-   {
+  {
     icon: <Gauge size={22} />,
     label: "V",
     title: "Medicion",
     accent: "#0077b6",
     modalContent: {
-      intro: "Nuestra misión es el corazón de todo lo que hacemos.",
+      intro: "Medimos el impacto real de la transformación, no solo indicadores superficiales.",
       points: [
-        { title: "Desarrollamos organizaciones extraordinarias alineando estrategia, liderazgo y cultura, mediante soluciones de alto impacto e implementación real, integrando un enfoque de Compliance 360° que garantiza sostenibilidad, integridad y resultados." },
+        { title: "Establecemos indicadores claros para evaluar resultados y dar seguimiento continuo. Ajustamos la estrategia para asegurar sostenibilidad." },
       ],
+      closingStatement: "Impacto medible en desempeño, cultura y resultados organizacionales.",
     },
   },
 ];
@@ -75,27 +86,12 @@ function MVVModal({ item, onClose }) {
       {item && (
         <>
           {/* Backdrop */}
-          <motion.div
-            key="backdrop"
-            initial={{ opacity: 0 }}
-            animate={{ opacity: 1 }}
-            exit={{ opacity: 0 }}
-            transition={{ duration: 0.3 }}
-            onClick={onClose}
-            className="fixed inset-0 z-50 bg-[#020c1e]/90 backdrop-blur-md"
-          />
+          <motion.div key="backdrop" initial={{ opacity: 0 }} animate={{ opacity: 1 }} exit={{ opacity: 0 }} transition={{ duration: 0.3 }} onClick={onClose} className="fixed inset-0 z-50 bg-[#020c1e]/90 backdrop-blur-md" />
 
           {/* Modal Content */}
-          <motion.div
-            key="modal"
-            initial={{ opacity: 0, scale: 0.92, y: 30 }}
-            animate={{ opacity: 1, scale: 1, y: 0 }}
-            exit={{ opacity: 0, scale: 0.94, y: 20 }}
-            transition={{ duration: 0.45, ease: [0.22, 1, 0.36, 1] }}
-            className="fixed inset-0 z-50 flex items-center justify-center px-4 pointer-events-none"
-          >
+          <motion.div key="modal" initial={{ opacity: 0, scale: 0.92, y: 30 }} animate={{ opacity: 1, scale: 1, y: 0 }} exit={{ opacity: 0, scale: 0.94, y: 20 }} transition={{ duration: 0.45, ease: [0.22, 1, 0.36, 1] }} className="fixed inset-0 z-50 flex items-center justify-center px-4 pointer-events-none">
             <div
-              className="relative w-full max-w-lg rounded-3xl overflow-hidden pointer-events-auto bg-gradient-to-br from-white via-[#f8fbff] to-[#eef6fb]"
+              className="relative w-full max-w-4xl max-h-[90vh] rounded-3xl overflow-hidden pointer-events-auto bg-gradient-to-br from-white via-[#f8fbff] to-[#eef6fb]"
               style={{
                 border: `1px solid ${item.accent}25`,
                 boxShadow: `0 0 80px ${item.accent}12, 0 30px 60px rgba(15, 23, 42, 0.16)`,
@@ -104,19 +100,14 @@ function MVVModal({ item, onClose }) {
               <div className="h-px w-full" style={{ background: `linear-gradient(90deg, transparent, ${item.accent}, transparent)` }} />
               <div className="absolute top-0 right-0 w-64 h-64 pointer-events-none" style={{ background: `radial-gradient(circle, ${item.accent}14 0%, transparent 70%)` }} />
 
-              <div className="relative p-8 sm:p-10">
+              <div className="relative p-8 sm:p-10 overflow-y-auto max-h-[80vh]">
                 <button
-                  onClick={onClose}
-                  className="absolute top-6 right-6 flex items-center justify-center w-9 h-9 rounded-xl transition-all duration-200 bg-white border border-slate-200 text-slate-500 hover:bg-slate-50 hover:text-slate-800"
-                >
+                  onClick={onClose} className="absolute top-6 right-6 flex items-center justify-center w-9 h-9 rounded-xl transition-all duration-200 bg-white border border-slate-200 text-slate-500 hover:bg-slate-50 hover:text-slate-800" >
                   <X size={16} />
                 </button>
 
                 <div className="flex items-center gap-4 mb-7">
-                  <div
-                    className="flex items-center justify-center w-12 h-12 rounded-2xl flex-shrink-0"
-                    style={{ background: `${item.accent}18`, border: `1px solid ${item.accent}35`, color: item.accent }}
-                  >
+                  <div className="flex items-center justify-center w-12 h-12 rounded-2xl flex-shrink-0" style={{ background: `${item.accent}18`, border: `1px solid ${item.accent}35`, color: item.accent }} >
                     {item.icon}
                   </div>
                   <div>
@@ -161,6 +152,15 @@ function MVVModal({ item, onClose }) {
                     </motion.div>
                   ))}
                 </div>
+
+                {item.modalContent.closingStatement && (
+                  <div className="mt-8 pt-8 border-t border-slate-200">
+                    <p className="text-sm italic text-slate-600 leading-relaxed">
+                      <span className="font-semibold text-slate-900">Resultado: </span>
+                      {item.modalContent.closingStatement}
+                    </p>
+                  </div>
+                )}
 
                 <div className="mt-9 flex items-center justify-between">
                   <span className="text-xs text-slate-400">INTELECTO</span>
@@ -248,10 +248,18 @@ export default function Nosotros() {
             initial={{ opacity: 0, y: 20 }}
             animate={{ opacity: 1, y: 0 }}
             transition={{ delay: 0.3, duration: 0.7 }}
-            className="mt-6 text-lg max-w-lg mx-auto font-light text-sky-900"
+            className="mt-20 text-lg max-w-lg mx-auto font-light text-sky-900"
           >
             En Intelecto trabajamos bajo un enfoque estructurado que combina 5 etapas...
           </motion.p>
+          <motion.p
+            initial={{ opacity: 0, y: 20 }}
+            animate={{ opacity: 1, y: 0 }}
+            transition={{ delay: 0.3, duration: 0.7 }}
+            className="mt-10 text-lg max-w-lg mx-auto font-light text-sky-900"
+          >
+            no implementamos soluciones estándar.
+            Diseñamos procesos de transformación organizacional con impacto real y medible.          </motion.p>
         </section>
 
         {/* MISIÓN / VISIÓN / VALORES */}

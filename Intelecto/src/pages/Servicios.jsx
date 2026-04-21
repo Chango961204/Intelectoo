@@ -1,24 +1,25 @@
 import { motion, useInView, AnimatePresence } from "framer-motion"
 import { useRef, useState } from "react"
 import { Link } from "react-router-dom"
-import { BadgeCheck,Star, X, Flag, HandCoins, UserRoundCheck, UserRoundCog, RefreshCw } from "lucide-react"
+import { BadgeCheck, Star, X, Flag, HandCoins, UserRoundCheck, UserRoundCog, RefreshCw } from "lucide-react"
 
 const mvv = [
     {
         icon: <BadgeCheck size={22} />,
-        label: "Direccion estrategica.",
+        label: "Programas que conectan visión, estrategia y ejecución.",
         title: "Saber hacia dónde ir",
         accent: "#3b82f6",
         modalContent: {
-            intro: "Conecta vision, estrategia y acción.",
+            intro: "Conecta visión, estrategia y acción.",
+            openingStatement: "Programas que conectan visión, estrategia y ejecución.",
             points: [
                 { title: "Planeación estratégica." },
-                { title: "Hoshin Kanri." },
+                { title: "Alineación estratégica con Hoshin Kanri." },
                 { title: "Gobierno Corporativo." },
-                { title: "Mejora Continua." },
-                { title: "5 'S'." },
-
+                { title: "Profesionalización de empresas (MIPYMES)." },
+                { title: "5´S para disciplina operativa." },
             ],
+            closingStatement: "Alineamos a toda la organización hacia objetivos claros, medibles y ejecutables.",
         },
     },
     {
@@ -28,11 +29,13 @@ const mvv = [
         accent: "#6366f1",
         modalContent: {
             intro: "Desarrolla un liderazgo transformador que inspire, movilice y potencie a tus equipos.",
+            openingStatement: "Programas para formar líderes que generan resultados",
             points: [
                 { title: "Huella de líder." },
                 { title: "Mandos medios accionando con impacto." },
                 { title: "Supervisores que inspiran acción." },
             ],
+            closingStatement: "Desarrollamos líderes que no solo dirigen, sino que movilizan, inspiran y generan resultados sostenibles.",
         },
     },
     {
@@ -42,11 +45,14 @@ const mvv = [
         accent: "#a78bfa",
         modalContent: {
             intro: "Conecta al colaborador con su propósito y rol dentro de la organización para generar compromiso y responsabilidad.",
+            openingStatement: "Programas:",
             points: [
                 { title: "Conciencia laboral." },
-                { title: "Bienestar con ", desc: "NOM-035." },
-                { title: "Servicio al cliente."},
+                { title: "Cultura de servicio al cliente." },
+                { title: "NOM-035 bienestar." },
+                { title: "Comunicación efectiva." },
             ],
+            closingStatement: "Programa de cultura y experiencia del colaborador diferenciador: no es clima... es comportamiento organizacional.",
         },
     },
     {
@@ -56,12 +62,14 @@ const mvv = [
         accent: "#a78bfa",
         modalContent: {
             intro: "Herramientas prácticas para atraer, formar y retener a las personas clave para el éxito de tu organización.",
+            openingStatement: "Personas correctas, en el lugar correcto, haciendo lo correcto.",
             points: [
-                { title: "Gestion por competencias." },
+                { title: "Gestión por competencias." },
                 { title: "Desarrollo de capital humano." },
                 { title: "Cumplimiento legal en capacitación." },
-                { title: "Formacion de instructores." },
+                { title: "Formación de instructores." },
             ],
+            closingStatement: "Sistema Integral de gestión del talento diferenciador: No es RH... es comportamiento organizacional.",
         },
     },
     {
@@ -71,32 +79,36 @@ const mvv = [
         accent: "#a78bfa",
         modalContent: {
             intro: "Optimizamos procesos, estandarizamos prácticas y promovemos la mejora continua para lograr eficiencia, calidad y consistencia en la operación.",
+            openingStatement: "Hacerlo bien, todo el tiempo.",
             points: [
-                { title: "Interpretacion de la norma", desc: "iso 9011" },
-                { title: "Gestión de auditorías bajo la norma" , desc: "iso 19011" },
+                { title: "Interpretación de la norma", desc: "ISO 9001" },
+                { title: "Auditorías", desc: "ISO 19011" },
                 { title: "Mejora continua." },
+                { title: "Seguridad.", desc: "KYT, comportamientos seguros" },
             ],
+            closingStatement: "Programa de Excelencia Operativa y Cumplimiento Diferenciador:No es cumplir normas… es operar con disciplina y consistencia..",
         },
     },
     {
         icon: <RefreshCw size={22} />,
-        label: "Compilance 360°.",
-        title: "Diseñmos e implementamos Sistemas Integrales de Cumplimiento, Ética y Gestión de Riesgos para proveedores Estratégicos.",
+        label: "Compliance 360°.",
+        title: "Diseñamos e implementamos Sistemas Integrales de Cumplimiento, Ética y Gestión de Riesgos para proveedores estratégicos.",
         accent: "#a78bfa",
         modalContent: {
-            intro: "Alineando a estándares internaciones; que te permiten:",
+            intro: "Alineando a estándares internacionales; que te permiten:",
+            openingStatement: "Implementamos mecanismos de cumplimiento que protegen tu negocio y resguardan su reputación.",
             points: [
                 { title: "Cumplimiento proporcional al tamaño de tu empresa." },
-                { title: "Cumplir con auditorias y requerimientos de clientes." },
+                { title: "Cumplir con auditorías y requerimientos de clientes." },
                 { title: "Proteger la continuidad de tus contratos, sin distraer a tu equipo operativo." },
+                { title: "Reducir riesgos legales." }
             ],
+            closingStatement: "Un sistema integral de cumplimiento que te permite operar con confianza y asegurar contratos estratégicos.",
         },
     },
 ]
 
-/*──────────────────────────────────────────
-  MODAL COMPONENT
-──────────────────────────────────────────*/
+
 function MVVModal({ item, onClose }) {
     if (!item) return null
 
@@ -125,7 +137,7 @@ function MVVModal({ item, onClose }) {
                     style={{ pointerEvents: "none" }}
                 >
                     <div
-                        className="relative w-full max-w-lg rounded-3xl overflow-hidden"
+                        className="relative w-full max-w-4xl max-h-[90vh] rounded-3xl overflow-hidden"
                         style={{
                             pointerEvents: "auto",
                             background: "linear-gradient(135deg, #ffffff 0%, #f8fbff 50%, #eef6fb 100%)",
@@ -145,7 +157,7 @@ function MVVModal({ item, onClose }) {
                             style={{ background: `radial-gradient(circle, ${item.accent}14 0%, transparent 70%)` }}
                         />
 
-                        <div className="relative p-8 sm:p-10">
+                        <div className="relative p-8 sm:p-10 overflow-y-auto max-h-[80vh]">
                             {/* Close button */}
                             <button
                                 onClick={onClose}
@@ -180,9 +192,15 @@ function MVVModal({ item, onClose }) {
                             </div>
 
                             {/* Intro */}
-                            <p className="text-sm leading-relaxed mb-8 pb-8 text-slate-600 border-b border-slate-200">
+                            <p className="text-sm leading-relaxed mb-4 text-slate-600">
                                 {item.modalContent.intro}
                             </p>
+
+                            {item.modalContent.openingStatement && (
+                                <p className="text-sm leading-relaxed mb-8 text-slate-700">
+                                    {item.modalContent.openingStatement}
+                                </p>
+                            )}
 
                             {/* Points */}
                             <div className="space-y-5">
@@ -214,30 +232,28 @@ function MVVModal({ item, onClose }) {
                                 ))}
                             </div>
 
+                            {item.modalContent.closingStatement && (
+                                <div className="mt-8 pt-8 border-t border-slate-200">
+                                    <p className="text-sm italic text-slate-600 leading-relaxed">
+                                        <span className="font-semibold text-slate-900">Cómo lo vendes: </span>
+                                        {item.modalContent.closingStatement}
+                                    </p>
+                                </div>
+                            )}
+
                             {/* Footer */}
                             <div className="mt-9 flex items-center justify-between">
                                 <span className="text-xs text-slate-400">
                                     INTELECTO
                                 </span>
-                                <button
-                                    onClick={onClose}
-                                    className="inline-flex items-center gap-2 px-5 py-2.5 rounded-xl text-xs font-semibold tracking-wide transition-all duration-300"
-                                    style={{
-                                        background: `${item.accent}18`,
-                                        border: `1px solid ${item.accent}30`,
-                                        color: item.accent,
-                                    }}
-                                >
+                                <button onClick={onClose} className="inline-flex items-center gap-2 px-5 py-2.5 rounded-xl text-xs font-semibold tracking-wide transition-all duration-300 text slate-900" style={{ background: `${item.accent}18`, border: `1px solid ${item.accent}30`, color: item.accent, }}>
                                     Cerrar
                                 </button>
                             </div>
                         </div>
 
                         {/* Bottom accent line */}
-                        <div
-                            className="h-px w-full"
-                            style={{ background: `linear-gradient(90deg, transparent, ${item.accent}40, transparent)` }}
-                        />
+                        <div className="h-px w-full" style={{ background: `linear-gradient(90deg, transparent, ${item.accent}40, transparent)` }} />
                     </div>
                 </motion.div>
             </>
@@ -245,9 +261,6 @@ function MVVModal({ item, onClose }) {
     )
 }
 
-/*──────────────────────────────────────────
-  MAIN PAGE COMPONENT
-──────────────────────────────────────────*/
 export default function Servicios() {
     const [activeModal, setActiveModal] = useState(null)
 
@@ -255,13 +268,7 @@ export default function Servicios() {
     const mvvInView = useInView(mvvRef, { once: true, margin: "-60px" })
 
     return (
-        <div
-            className="relative min-h-screen text-white"
-            style={{
-                background: "linear-gradient(135deg, #ffffff 0%, #f4f7fb 50%, #ffffff 100%)",
-                fontFamily: "'Sora', 'DM Sans', sans-serif",
-            }}
-        >
+        <div className="relative min-h-screen text-white" style={{ background: "linear-gradient(135deg, #ffffff 0%, #f4f7fb 50%, #ffffff 100%)", fontFamily: "'Sora', 'DM Sans', sans-serif", }} >
             <style>{`@import url('https://fonts.googleapis.com/css2?family=Sora:wght@300;400;600;700;800;900&display=swap');`}</style>
 
             {/* Modal — fuera del flujo de scroll */}
@@ -313,18 +320,13 @@ export default function Servicios() {
                         </span>
                     </motion.h1>
 
-                    <motion.p
-                        initial={{ opacity: 0, y: 20 }}
-                        animate={{ opacity: 1, y: 0 }}
-                        transition={{ delay: 0.3, duration: 0.7 }}
-                        className="mt-6 text-lg max-w-lg mx-auto font-light text-sky-900"
-                    >
+                    <motion.p initial={{ opacity: 0, y: 20 }} animate={{ opacity: 1, y: 0 }} transition={{ delay: 0.3, duration: 0.7 }} className="mt-10 text-lg max-w-lg mx-auto font-light text-sky-900" >
                         Integra cinco pilares estratégicos que permiten alinear
                         la dirección, fortalecer el liderazgo, desarrollar la cultura
                         organizacional, potenciar el talento y optimizar la
                         operación.
                     </motion.p>
-                    <p className="mt-4 text-base max-w-2xl mx-auto font-light text-sky-900">
+                    <p className="mt-8 text-base max-w-2xl mx-auto font-light text-sky-900">
                         Todo el modelo se encuentra respaldado por el Sistema
                         Intelecto Compliance 360°
                         , asegurando organizaciones
@@ -332,7 +334,6 @@ export default function Servicios() {
                     </p>
                 </section>
 
-                {/*──── MISIÓN / VISIÓN / VALORES ────*/}
                 <section className="py-20 px-6" ref={mvvRef}>
                     <div className="max-w-6xl mx-auto">
 
@@ -354,29 +355,17 @@ export default function Servicios() {
                                     className="group relative"
                                 >
                                     {/* Hover glow border */}
-                                    <div
-                                        className="absolute -inset-px rounded-2xl opacity-0 group-hover:opacity-100 transition-opacity duration-500"
-                                        style={{ background: `linear-gradient(135deg, ${item.accent}33, transparent)`, filter: "blur(1px)" }}
-                                    />
+                                    <div className="absolute -inset-px rounded-2xl opacity-0 group-hover:opacity-100 transition-opacity duration-500" style={{ background: `linear-gradient(135deg, ${item.accent}33, transparent)`, filter: "blur(1px)" }} />
 
                                     <div className="relative h-full rounded-2xl p-8 overflow-hidden flex flex-col bg-white/80 border border-slate-200 shadow-[0_18px_45px_rgba(15,23,42,0.08)] backdrop-blur-sm">
-                                        {/* Inner shine */}
                                         <div className="absolute inset-0 pointer-events-none bg-gradient-to-br from-white/70 via-white/30 to-transparent" />
 
-                                        {/* Icon */}
-                                        <div
-                                            className="relative z-10 inline-flex items-center justify-center w-11 h-11 rounded-xl mb-5"
-                                            style={{ background: `${item.accent}18`, border: `1px solid ${item.accent}30`, color: item.accent }}
-                                        >
+                                        <div className="relative z-10 inline-flex items-center justify-center w-11 h-11 rounded-xl mb-5" style={{ background: `${item.accent}18`, border: `1px solid ${item.accent}30`, color: item.accent }} >
                                             {item.icon}
                                         </div>
 
-                                        {/* Content */}
                                         <div className="relative z-10 flex-1">
-                                            <span
-                                                className="text-xs uppercase tracking-widest font-semibold mb-2 block opacity-90"
-                                                style={{ color: item.accent }}
-                                            >
+                                            <span className="text-xs uppercase tracking-widest font-semibold mb-2 block opacity-90" style={{ color: item.accent }} >
                                                 {item.label}
                                             </span>
                                             <h3 className="font-bold text-lg mb-3 text-slate-900">
@@ -384,12 +373,7 @@ export default function Servicios() {
                                             </h3>
                                         </div>
 
-                                        {/* Ver más button */}
-                                        <button
-                                            onClick={() => setActiveModal(item)}
-                                            className="relative z-10 mt-7 self-start flex items-center gap-2 text-xs uppercase tracking-widest font-semibold transition-all duration-300 group/btn"
-                                            style={{ color: item.accent }}
-                                        >
+                                        <button onClick={() => setActiveModal(item)} className="relative z-10 mt-7 self-start flex items-center gap-2 text-xs uppercase tracking-widest font-semibold transition-all duration-300 group/btn" style={{ color: item.accent }} >
                                             <span style={{ opacity: 0.65, transition: "opacity 0.2s" }}
                                                 onMouseEnter={e => e.currentTarget.style.opacity = "1"}
                                                 onMouseLeave={e => e.currentTarget.style.opacity = "0.65"}
@@ -401,11 +385,7 @@ export default function Servicios() {
                                             </span>
                                         </button>
 
-                                        {/* Bottom accent line on hover */}
-                                        <div
-                                            className="absolute bottom-0 left-0 h-px w-0 group-hover:w-full transition-all duration-700"
-                                            style={{ background: `linear-gradient(90deg, ${item.accent}, transparent)` }}
-                                        />
+                                        <div className="absolute bottom-0 left-0 h-px w-0 group-hover:w-full transition-all duration-700" style={{ background: `linear-gradient(90deg, ${item.accent}, transparent)` }} />
                                     </div>
                                 </motion.div>
                             ))}
@@ -413,7 +393,6 @@ export default function Servicios() {
                     </div>
                 </section>
 
-                {/*──── CTA ────*/}
                 <section className="py-28 px-6">
                     <div className="max-w-3xl mx-auto text-center">
                         <motion.div
@@ -422,10 +401,7 @@ export default function Servicios() {
                             viewport={{ once: true }}
                             transition={{ duration: 0.8 }}
                         >
-                            <h2
-                                className="font-black tracking-tight leading-none mb-5 text-blue-950"
-                                style={{ fontSize: "clamp(1.8rem, 5vw, 3rem)" }}
-                            >
+                            <h2 className="font-black tracking-tight leading-none mb-5 text-blue-950" style={{ fontSize: "clamp(1.8rem, 5vw, 3rem)" }} >
                                 ¿Trabajamos{" "}
                                 <span style={{ background: "linear-gradient(135deg, #000000, #00b4d8, #0077b6)", WebkitBackgroundClip: "text", WebkitTextFillColor: "transparent", backgroundClip: "text" }}>
                                     juntos?
