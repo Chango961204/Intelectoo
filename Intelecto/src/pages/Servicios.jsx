@@ -86,7 +86,7 @@ const mvv = [
                 { title: "Mejora continua." },
                 { title: "Seguridad.", desc: "KYT, comportamientos seguros" },
             ],
-            closingStatement: "Programa de Excelencia Operativa y Cumplimiento Diferenciador:No es cumplir normas… es operar con disciplina y consistencia..",
+            closingStatement: "Programa de Excelencia Operativa y Cumplimiento Diferenciador: No es cumplir normas… es operar con disciplina y consistencia..",
         },
     },
     {

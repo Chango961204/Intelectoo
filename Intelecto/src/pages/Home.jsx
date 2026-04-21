@@ -209,7 +209,7 @@ export default function Home() {
                             initial={{ opacity: 0, y: 30 }}
                             animate={{ opacity: 1, y: 0 }}
                             transition={{ delay: 1.2, duration: 0.8 }}
-                            className="mt-8 text-lg max-w-lg mx-auto font-light text-sky-900"
+                            className="mt-20 text-lg max-w-lg mx-auto font-light text-sky-900"
 /*                             style={{ color: "#475569" }}
  */                        >
                             Soluciones de consultoría y formación para la
@@ -223,37 +223,7 @@ export default function Home() {
                             transition={{ delay: 1.45, duration: 0.7 }}
                             className="mt-12 flex flex-col sm:flex-row justify-center gap-4"
                         >
-                            <Link
-                                to="/servicios"
-                                className="group relative inline-flex items-center gap-2 px-8 py-4 rounded-xl font-semibold text-sm tracking-wide overflow-hidden text-white"
-                                style={{ background: "linear-gradient(135deg, #0a1b5c, #00b4d8)", boxShadow: "0 4px 15px rgba(0, 180, 216, 0.2)" }}
-                            >
-                                <span className="relative z-10">Ver servicios</span>
-                                <span className="relative z-10 group-hover:translate-x-1 transition-transform duration-300">→</span>
-                                <div className="absolute inset-0 opacity-0 group-hover:opacity-100 transition-opacity duration-300"
-                                    style={{ background: "rgba(255,255,255,0.15)" }} />
-                            </Link>
-                            <Link
-                                to="/contacto"
-                                className="group inline-flex items-center gap-2 px-8 py-4 rounded-xl font-semibold text-sm tracking-wide transition-all duration-300 bg-white shadow-sm"
-                                style={{
-                                    border: "1px solid rgba(10,27,92,0.15)",
-                                    color: "#0a1b5c",
-                                }}
-                                onMouseEnter={e => {
-                                    e.currentTarget.style.borderColor = "rgba(0,180,216,0.60)"
-                                    e.currentTarget.style.background = "rgba(0,180,216,0.04)"
-                                    e.currentTarget.style.color = "#00b4d8"
-                                }}
-                                onMouseLeave={e => {
-                                    e.currentTarget.style.borderColor = "rgba(10,27,92,0.15)"
-                                    e.currentTarget.style.background = "#ffffff"
-                                    e.currentTarget.style.color = "#0a1b5c"
-                                }}
-                            >
-                                Agendar consulta
-                                <span className="group-hover:translate-x-1 transition-transform duration-300">→</span>
-                            </Link>
+                            
                         </motion.div>
                     </motion.div>
                 </section>
@@ -322,6 +292,39 @@ export default function Home() {
                     </div>
                 </motion.div>
 
+                    <section className="mt-20 flex flex-col sm:flex-row justify-center gap-6 px-4">
+                        <Link
+                                to="/servicios"
+                                className="group relative inline-flex items-center gap-2 px-8 py-4 rounded-xl font-semibold text-sm tracking-wide overflow-hidden text-white"
+                                style={{ background: "linear-gradient(135deg, #0a1b5c, #00b4d8)", boxShadow: "0 4px 15px rgba(0, 180, 216, 0.2)" }}
+                            >
+                                <span className="relative z-10">Ver servicios</span>
+                                <span className="relative z-10 group-hover:translate-x-1 transition-transform duration-300">→</span>
+                                <div className="absolute inset-0 opacity-0 group-hover:opacity-100 transition-opacity duration-300"
+                                    style={{ background: "rgba(255,255,255,0.15)" }} />
+                            </Link>
+                            <Link
+                                to="/contacto"
+                                className="group inline-flex items-center gap-2 px-8 py-4 rounded-xl font-semibold text-sm tracking-wide transition-all duration-300 bg-white shadow-sm"
+                                style={{
+                                    border: "1px solid rgba(10,27,92,0.15)",
+                                    color: "#0a1b5c",
+                                }}
+                                onMouseEnter={e => {
+                                    e.currentTarget.style.borderColor = "rgba(0,180,216,0.60)"
+                                    e.currentTarget.style.background = "rgba(0,180,216,0.04)"
+                                    e.currentTarget.style.color = "#00b4d8"
+                                }}
+                                onMouseLeave={e => {
+                                    e.currentTarget.style.borderColor = "rgba(10,27,92,0.15)"
+                                    e.currentTarget.style.background = "#ffffff"
+                                    e.currentTarget.style.color = "#0a1b5c"
+                                }}
+                            >
+                                Agendar consulta
+                                <span className="group-hover:translate-x-1 transition-transform duration-300">→</span>
+                            </Link>
+                    </section>
                 <div style={{ height: "5rem" }} />
             </div>
         </div>
