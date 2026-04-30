@@ -31,8 +31,8 @@ const socials = [
     {
         icon: <FaEnvelope size={20} />,
         label: "Correo",
-        value: "contacto@intelecto.mx",
-        href: "mailto:contacto@intelecto.mx",
+        value: "intelectomx@intelectomx.com.mx",
+        href: "mailto:intelectomx@intelectomx.com.mx",
         accent: "#f59e0b",
         desc: "Respuesta en 24h",
     },
@@ -41,7 +41,7 @@ const socials = [
 const info = [
     { icon: <MapPin size={16} />, label: "Ubicación", value: "Zacatecas, México" },
     { icon: <Phone size={16} />, label: "Teléfono", value: "+52 492 126 5536" },
-    { icon: <FaEnvelope size={14} />, label: "Email", value: "contacto@intelecto.mx" },
+    { icon: <FaEnvelope size={14} />, label: "Email", value: "intelectomx@intelectomx.com.mx" },
 ]
 
 function SocialCard({ s, i, inView }) {

@@ -23,7 +23,7 @@ const links = [
   {
     title: "Contacto",
     items: [
-      { label: "contacto@intelecto.mx", to: "/contacto", external: false },
+      { label: "intelectomx@intelectomx.com.mx", to: "/contacto", external: false },
       { label: "+52 492 126 5536", to: null },
       { label: "Zacatecas, México", to: null },
     ],
@@ -51,7 +51,7 @@ const socials = [
   },
   {
     icon: <FaEnvelope size={16} />,
-    href: "mailto:contacto@intelecto.mx",
+    href: "mailto:intelectomx@intelectomx.com.mx",
     label: "Email",
     hoverColor: "#f87171",
   },
