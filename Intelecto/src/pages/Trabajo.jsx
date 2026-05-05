@@ -249,7 +249,7 @@ export default function Nosotros() {
             transition={{ delay: 0.3, duration: 0.7 }}
             className="mt-10 text-lg max-w-lg mx-auto font-light text-sky-900"
           >
-            no implementamos soluciones estándar.
+            No implementamos soluciones estándar.
             Diseñamos procesos de transformación organizacional con impacto real y medible.          </motion.p>
         </section>
 
