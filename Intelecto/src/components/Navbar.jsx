@@ -67,7 +67,7 @@ export default function Navbar() {
                     <div className="max-w-7xl mx-auto flex justify-between items-center px-6 py-3.5">
 
                         {/* LOGO */}
-                        <Link to="/" className="flex items-center gap-2 group">
+                        <Link to="/" className="flex items-center gap-2 group hover:scale-105 transition-transform duration-300">
                             <img
                                 src={logo}
                                 alt="Intelecto"
