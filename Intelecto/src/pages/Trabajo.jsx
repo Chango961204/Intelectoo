@@ -55,7 +55,7 @@ const mvv = [
       intro: "Acompañamos a la organización en la ejecución. No solo capacitamos: intervenimos en la operación para asegurar adopción, disciplina y cambio de comportamiento.",
       points: [
         { title: "Programas ejecutivos", desc: "Procesos estructurados de desarrollo alineados a objetivos estratégicos, dirigidos a líderes y equipos clave." },
-        { title: "Talleres de alto impacto", desc: "Sesiones dinámicas y prácticas enfocadas en generar consiencia y accion inmediata." },
+        { title: "Talleres de alto impacto", desc: "Sesiones dinámicas y prácticas enfocadas en generar conciencia y accion inmediata." },
         { title: "Programas de desarrollo humano y liderazgo personal:", desc: "Mujeres líderes en armonía. Domina tu agenda, transforma tu vida. Emprendimiento y profesionalización. " },
         { title: "Acompañamiento en campo", desc: "Intervencion directa en la operaciòn para asegurar la correcta aplicaciòn de procesos y herramientas." },
         { title: "Coaching a líderes", desc: "Proceso personalizado para fortalecer habilidades de liderazgo, toma de decisiones y gestión de equipos." },
