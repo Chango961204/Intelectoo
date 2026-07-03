@@ -76,8 +76,8 @@ export const contactSocials = [
   {
     icon: createElement(FaInstagram, { size: 20 }),
     label: "Instagram",
-    value: "@intelectoparati",
-    href: "https://www.instagram.com/intelectoparati/",
+    value: "@intelecto2024",
+    href: "https://www.instagram.com/intelecto2024/",
     accent: "#ec4899",
     desc: "Síguenos",
   },

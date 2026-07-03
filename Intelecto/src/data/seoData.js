@@ -8,7 +8,7 @@ const organizationSchema = {
   "logo": `${SITE_URL}/circle.png`,
   "sameAs": [
     "https://www.facebook.com/intelecto.zacatecas",
-    "https://www.instagram.com/intelectoparati/"
+    "https://www.instagram.com/intelecto2024/",
   ],
   "contactPoint": [
     {
