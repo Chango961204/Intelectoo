@@ -8,7 +8,6 @@ export default function Card({ title, description, icon }) {
       whileHover={{ y: -6 }}
       transition={{ duration: 0.35, ease: [0.22, 1, 0.36, 1] }}
       className="group relative h-full"
-      style={{ fontFamily: "'Sora', sans-serif" }}
     >
       {/* Glow border on hover */}
       <div

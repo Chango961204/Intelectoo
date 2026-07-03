@@ -1,5 +1,7 @@
 import { motion, AnimatePresence, useInView } from "framer-motion"
 import { useRef, useState } from "react"
+import Seo from "../components/Seo"
+import { siteMeta } from "../data/seoData"
 
 const categorias = ["Todos", "Consultoría", "Capacitación", "Gestión"]
 
@@ -98,14 +100,14 @@ export default function Catalogo() {
     : items.filter(i => i.categoria === activeCategoria)
 
   return (
-    <div
-      className="relative min-h-screen text-white"
+    <>
+      <Seo {...siteMeta.catalogo} />
+      <div
+        className="relative min-h-screen text-white"
       style={{
         background: "linear-gradient(135deg, #020818 0%, #040f2a 40%, #030b1f 70%, #050a18 100%)",
-        fontFamily: "'Sora', 'DM Sans', sans-serif",
       }}
     >
-      <style>{`@import url('https://fonts.googleapis.com/css2?family=Sora:wght@300;400;600;700;800;900&display=swap');`}</style>
 
       {/* Ambient */}
       <div className="fixed inset-0 pointer-events-none overflow-hidden" style={{ zIndex: 0 }}>
@@ -203,5 +205,6 @@ export default function Catalogo() {
 
       </div>
     </div>
+  </>
   )
 }

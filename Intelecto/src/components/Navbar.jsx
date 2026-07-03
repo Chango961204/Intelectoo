@@ -3,6 +3,7 @@ import { useState, useEffect } from "react"
 import { Menu, X } from "lucide-react"
 import { motion, AnimatePresence } from "framer-motion"
 import logo from "../assets/lettering.png"
+import { navLinks } from "../data/pageContent"
 
 export default function Navbar() {
     const [open, setOpen] = useState(false)
@@ -18,27 +19,15 @@ export default function Navbar() {
     // Cierra el menú al cambiar de ruta
     useEffect(() => setOpen(false), [location.pathname])
 
-    const links = [
-        { to: "/", label: "Inicio" },
-        { to: "/nosotros", label: "Nosotros" },
-        { to: "/servicios", label: "Servicios" },
-        { to: "/trabajo", label: "Trabajo" },
-/*         { to: "/catalogo", label: "Catálogo" },
- */        { to: "/contacto", label: "Contacto" },
-    ]
+    const links = navLinks
 
     return (
         <>
-            <style>{`
-        @import url('https://fonts.googleapis.com/css2?family=Sora:wght@400;500;600;700&display=swap');
-        .nav-font { font-family: 'Sora', sans-serif; }
-      `}</style>
-
             <motion.nav
                 initial={{ y: -100, opacity: 0 }}
                 animate={{ y: 0, opacity: 1 }}
                 transition={{ duration: 0.8, ease: [0.22, 1, 0.36, 1] }}
-                className="nav-font fixed w-full z-50"
+                className="fixed w-full z-50"
                 style={{
                     top: 0,
                     transition: "all 0.5s cubic-bezier(0.22,1,0.36,1)",

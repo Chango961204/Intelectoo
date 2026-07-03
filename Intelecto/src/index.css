@@ -1,16 +1,31 @@
+@import url('https://fonts.googleapis.com/css2?family=Sora:wght@300;400;500;600;700;800;900&family=DM+Sans:ital,wght@0,300;0,400;1,300&display=swap');
+
 @tailwind base;
 @tailwind components;
 @tailwind utilities;
 
-/* scroll suave */
+:root {
+  color-scheme: light;
+}
+
 html {
   scroll-behavior: smooth;
 }
 
 body {
-  font-family: system-ui, sans-serif;
+  margin: 0;
+  font-family: 'Sora', 'DM Sans', system-ui, sans-serif;
+  background: #ffffff;
+  color: #0f172a;
 }
 
-html {
-  scroll-behavior: smooth;
+* {
+  box-sizing: border-box;
+}
+
+button,
+input,
+textarea,
+select {
+  font: inherit;
 }

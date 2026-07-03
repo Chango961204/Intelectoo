@@ -1,102 +1,10 @@
 import { motion, useInView } from "framer-motion"
 import { useRef, useState } from "react"
-import { FaWhatsapp, FaFacebookF, FaInstagram, FaEnvelope } from "react-icons/fa"
-import { MapPin, Phone, Send } from "lucide-react"
-
-const socials = [
-    {
-        icon: <FaWhatsapp size={20} />,
-        label: "WhatsApp",
-        value: "+52 492 126 5536",
-        href: "https://wa.me/+524921265536",
-        accent: "#22c55e",
-        desc: "Respuesta inmediata",
-    },
-    {
-        icon: <FaFacebookF size={20} />,
-        label: "Facebook",
-        value: "Intelecto Zacatecas",
-        href: "https://www.facebook.com/intelecto.zacatecas",
-        accent: "#3b82f6",
-        desc: "Contenido adicional y noticias",
-    },
-    {
-        icon: <FaInstagram size={20} />,
-        label: "Instagram",
-        value: "@intelectoparati",
-        href: "https://www.instagram.com/intelectoparati/",
-        accent: "#ec4899",
-        desc: "Siguenos",
-    },
-    {
-        icon: <FaEnvelope size={20} />,
-        label: "Correo",
-        value: "intelectomx@intelectomx.com.mx",
-        href: "mailto:intelectomx@intelectomx.com.mx",
-        accent: "#f59e0b",
-        desc: "Respuesta en 24h",
-    },
-]
-
-const info = [
-    { icon: <MapPin size={16} />, label: "Ubicación", value: "Zacatecas, México" },
-    { icon: <Phone size={16} />, label: "Teléfono", value: "+52 492 126 5536" },
-    { icon: <FaEnvelope size={14} />, label: "Email", value: "intelectomx@intelectomx.com.mx" },
-]
-
-function SocialCard({ s, i, inView }) {
-    const [hovered, setHovered] = useState(false)
-    return (
-        <motion.a
-            href={s.href}
-            target={s.href.startsWith("http") ? "_blank" : undefined}
-            rel="noopener noreferrer"
-            initial={{ opacity: 0, y: 30 }}
-            animate={inView ? { opacity: 1, y: 0 } : {}}
-            transition={{ delay: i * 0.08, duration: 0.7, ease: [0.22, 1, 0.36, 1] }}
-            onMouseEnter={() => setHovered(true)}
-            onMouseLeave={() => setHovered(false)}
-            className="relative group block"
-        >
-            <div
-                className="absolute -inset-px rounded-2xl opacity-0 group-hover:opacity-100 transition-opacity duration-500"
-                style={{ background: `linear-gradient(135deg, ${s.accent}30, transparent)`, filter: "blur(1px)" }}
-            />
-            <div
-                className="relative rounded-2xl p-5 flex items-center gap-4 transition-all duration-300"
-                style={{
-                    background: hovered ? "rgba(255,255,255,0.92)" : "rgba(255,255,255,0.8)",
-                    border: hovered ? `1px solid ${s.accent}30` : "1px solid rgba(148,163,184,0.25)",
-                    boxShadow: hovered ? "0 20px 45px rgba(15,23,42,0.12)" : "0 18px 40px rgba(15,23,42,0.08)",
-                    backdropFilter: "blur(10px)",
-                }}
-            >
-                {/* Icon bubble */}
-                <div
-                    className="flex-shrink-0 w-11 h-11 rounded-xl flex items-center justify-center transition-all duration-300"
-                    style={{
-                        background: hovered ? `${s.accent}20` : `${s.accent}12`,
-                        border: `1px solid ${hovered ? s.accent + "40" : s.accent + "20"}`,
-                        color: hovered ? s.accent : "#334155",
-                    }}
-                >
-                    {s.icon}
-                </div>
-                {/* Text */}
-                <div className="flex-1 min-w-0">
-                    <p className="text-xs uppercase tracking-widest font-medium mb-0.5" style={{ color: s.accent }}>{s.label}</p>
-                    <p className="text-sm font-semibold truncate" style={{ color: "#0f172a" }}>{s.value}</p>
-                    <p className="text-xs mt-0.5" style={{ color: "#64748b" }}>{s.desc}</p>
-                </div>
-                {/* Arrow */}
-                <span
-                    className="flex-shrink-0 text-sm transition-all duration-300"
-                    style={{ color: hovered ? s.accent : "#94a3b8", transform: hovered ? "translateX(3px)" : "translateX(0)" }}
-                >→</span>
-            </div>
-        </motion.a>
-    )
-}
+import { Send } from "lucide-react"
+import ContactChannelCard from "../components/ContactChannelCard"
+import Seo from "../components/Seo"
+import { contactInfo, contactSocials } from "../data/pageContent"
+import { siteMeta } from "../data/seoData"
 
 export default function Contacto() {
     const headerRef = useRef(null)
@@ -131,22 +39,14 @@ export default function Contacto() {
     }
 
     return (
-        <div
-            className="relative min-h-screen text-white"
+        <>
+            <Seo {...siteMeta.contacto} />
+            <div
+                className="relative min-h-screen text-white"
             style={{
                 background: "linear-gradient(135deg, #ffffff 0%, #f4f7fb 50%, #ffffff 100%)",
-                fontFamily: "'Sora', 'DM Sans', sans-serif",
             }}
         >
-            <style>{`
-        @import url('https://fonts.googleapis.com/css2?family=Sora:wght@300;400;600;700;800;900&display=swap');
-        .contact-input::placeholder { color: rgba(100,116,139,0.7); }
-        .contact-input:focus {
-          border-color: rgba(0,180,216,0.45) !important;
-          background: rgba(255,255,255,0.95) !important;
-          box-shadow: 0 0 0 3px rgba(0,180,216,0.10) !important;
-        }
-      `}</style>
 
             {/* Ambient */}
             <div className="fixed inset-0 pointer-events-none overflow-hidden" style={{ zIndex: 0 }}>
@@ -210,8 +110,8 @@ export default function Contacto() {
                                     Canales de contacto
                                 </motion.p>
                                 <div className="flex flex-col gap-3">
-                                    {socials.map((s, i) => (
-                                        <SocialCard key={i} s={s} i={i} inView={socialsInView} />
+                                    {contactSocials.map((social, index) => (
+                                        <ContactChannelCard key={social.label} channel={social} index={index} inView={socialsInView} />
                                     ))}
                                 </div>
                             </div>
@@ -227,7 +127,7 @@ export default function Contacto() {
                                     Información
                                 </p>
                                 <div className="flex flex-col gap-4">
-                                    {info.map((item, i) => (
+                                    {contactInfo.map((item, i) => (
                                         <div key={i} className="flex items-center gap-3">
                                             <div className="w-8 h-8 rounded-lg flex items-center justify-center flex-shrink-0" style={{ background: "rgba(0,180,216,0.10)", border: "1px solid rgba(0,180,216,0.18)", color: "#0077b6" }}>
                                                 {item.icon}
@@ -261,5 +161,6 @@ export default function Contacto() {
 
             </div>
         </div>
+      </>
     )
 }

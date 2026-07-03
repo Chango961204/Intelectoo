@@ -1,8 +1,8 @@
 import { motion, useInView, AnimatePresence } from "framer-motion";
 import { useRef, useState } from "react";
 import { Link } from "react-router-dom";
-import { Target, Eye, Star, X } from "lucide-react";
-
+import { Target, Eye, Star, X } from "lucide-react";import Seo from "../components/Seo"
+import { siteMeta } from "../data/seoData"
 const mvv = [
     {
         icon: <Target size={22} />,
@@ -164,11 +164,12 @@ export default function Nosotros() {
     const mvvInView = useInView(mvvRef, { once: true, margin: "-60px" });
 
     return (
-        <div
-            className="relative min-h-screen text-white"
+        <>
+            <Seo {...siteMeta.nosotros} />
+            <div
+                className="relative min-h-screen text-white"
             style={{
                 background: "linear-gradient(135deg, #ffffff 0%, #f4f7fb 50%, #ffffff 100%)",
-                fontFamily: "'Sora', 'DM Sans', sans-serif",
             }}
         >
             <MVVModal item={activeModal} onClose={() => setActiveModal(null)} />
@@ -332,5 +333,6 @@ export default function Nosotros() {
                 </section>
             </div>
         </div>
+      </>
     );
 }

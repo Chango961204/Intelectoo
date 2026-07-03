@@ -1,6 +1,8 @@
 import { motion, useInView } from "framer-motion"
 import { useRef } from "react"
 import { Target, Eye, Compass, Heart, Shield, Zap } from "lucide-react"
+import Seo from "../components/Seo"
+import { siteMeta } from "../data/seoData"
 
 const valores = [
     { icon: <Heart size={18} />, title: "Compromiso", text: "Nos involucramos con la realidad de cada cliente, adaptando soluciones genuinas a sus necesidades." },
@@ -16,14 +18,14 @@ export default function MisionVision() {
     const valInView = useInView(valRef, { once: true, margin: "-60px" })
 
     return (
-        <div
-            className="relative min-h-screen text-white"
+        <>
+            <Seo {...siteMeta.misionVision} />
+            <div
+                className="relative min-h-screen text-white"
             style={{
                 background: "linear-gradient(135deg, #020818 0%, #040f2a 40%, #030b1f 70%, #050a18 100%)",
-                fontFamily: "'Sora', 'DM Sans', sans-serif",
             }}
         >
-            <style>{`@import url('https://fonts.googleapis.com/css2?family=Sora:wght@300;400;600;700;800;900&display=swap');`}</style>
 
             {/* Ambient */}
             <div className="fixed inset-0 pointer-events-none overflow-hidden" style={{ zIndex: 0 }}>
@@ -163,5 +165,6 @@ export default function MisionVision() {
 
             </div>
         </div>
+      </>
     )
 }

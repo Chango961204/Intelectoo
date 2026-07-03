@@ -1,8 +1,8 @@
 import { motion, useInView } from "framer-motion"
 import { useRef } from "react"
 import { Link } from "react-router-dom"
-import { FaWhatsapp, FaFacebookF, FaInstagram, FaEnvelope } from "react-icons/fa"
 import logo from "../assets/LogoFinal.png"
+import { contactSocials } from "../data/pageContent"
 
 const links = [
   {
@@ -30,32 +30,10 @@ const links = [
   },
 ]
 
-const socials = [
-  {
-    icon: <FaWhatsapp size={16} />,
-    href: "https://wa.me/+524921265536",
-    label: "WhatsApp",
-    hoverColor: "#22c55e",
-  },
-  {
-    icon: <FaFacebookF size={16} />,
-    href: "https://www.facebook.com/intelecto.zacatecas",
-    label: "Facebook",
-    hoverColor: "#3b82f6",
-  },
-  {
-    icon: <FaInstagram size={16} />,
-    href: "https://www.instagram.com/intelectoparati/",
-    label: "Instagram",
-    hoverColor: "#ec4899",
-  },
-  {
-    icon: <FaEnvelope size={16} />,
-    href: "mailto:intelectomx@intelectomx.com.mx",
-    label: "Email",
-    hoverColor: "#f87171",
-  },
-]
+const socials = contactSocials.map((social) => ({
+  ...social,
+  hoverColor: social.accent,
+}))
 
 export default function Footer() {
   const ref = useRef(null)
@@ -65,7 +43,6 @@ export default function Footer() {
     <footer
       ref={ref}
       style={{
-        fontFamily: "'Sora', 'DM Sans', sans-serif",
         background: "linear-gradient(180deg, #ffffff 0%, #f4f7fb 100%)",
         borderTop: "1px solid rgba(148,163,184,0.14)",
         position: "relative",
@@ -106,7 +83,7 @@ export default function Footer() {
           initial={{ opacity: 0, y: 30 }}
           animate={inView ? { opacity: 1, y: 0 } : {}}
           transition={{ duration: 0.8, ease: [0.22, 1, 0.36, 1] }}
-          className="flex flex-col md:flex-row justify-between items-start md:items-center gap-8 py-12"
+          className="flex flex-col md:flex-row justify-between items-start md:items-center gap-8 py-12 hover:scale-105 transition-transform duration-300"
           style={{ borderBottom: "1px solid rgba(148,163,184,0.14)" }}
         >
           {/* Brand */}

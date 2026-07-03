@@ -9,7 +9,7 @@ export default function Clients() {
     const doubled = [...logos, ...logos]
 
     return (
-        <div style={{ fontFamily: "'Sora', sans-serif" }}>
+        <div>
 
             {/* Label */}
             <div className="flex items-center gap-4 mb-10">

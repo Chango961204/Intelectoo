@@ -1,8 +1,11 @@
 import Navbar from "../components/Navbar"
 import Footer from "../components/Footer"
 import { motion } from "framer-motion"
+import { useLocation } from "react-router-dom"
 
 export default function MainLayout({ children }) {
+  const location = useLocation()
+
   return (
     <div className="flex flex-col min-h-screen">
       <Navbar />

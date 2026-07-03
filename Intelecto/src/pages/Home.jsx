@@ -1,6 +1,9 @@
 import { motion, useScroll, useTransform, useInView } from "framer-motion"
 import { useRef, useEffect, useState } from "react"
 import { Link } from "react-router-dom"
+import Seo from "../components/Seo"
+import { homeServices } from "../data/pageContent"
+import { siteMeta } from "../data/seoData"
 
 function AnimatedCounter({ end, duration = 1.8 }) {
     const [count, setCount] = useState(0)
@@ -68,23 +71,7 @@ function StatCard({ num, label, i }) {
     )
 }
 
-const services = [
-    {
-        icon: "◈",
-        title: "Consultoría Estratégica",
-        desc: "Transformamos la visión de tu organización en resultados medibles con metodologías de clase mundial.",
-    },
-    {
-        icon: "◇",
-        title: "Capacitación Especializada",
-        desc: "Programas de formación diseñados a la medida para elevar el capital humano de tu empresa.",
-    },
-    {
-        icon: "◉",
-        title: "Sistemas de Gestión",
-        desc: "Diseño e implementación de sistemas que optimizan procesos y certifican excelencia operacional.",
-    },
-]
+const services = homeServices
 
 function ServiceCard({ s, i }) {
     const ref = useRef(null)
@@ -123,17 +110,14 @@ export default function Home() {
     const heroOpacity = useTransform(scrollYProgress, [0, 0.6], [1, 0])
 
     return (
-        <div
-            className="relative min-h-screen overflow-hidden text-slate-800"
+        <>
+            <Seo {...siteMeta.home} />
+            <div
+                className="relative min-h-screen overflow-hidden text-slate-800"
             style={{
                 background: "linear-gradient(135deg, #ffffff 0%, #f4f7fb 50%, #ffffff 100%)",
-                fontFamily: "'Sora', 'DM Sans', sans-serif",
             }}
         >
-            <style>{`
-                @import url('https://fonts.googleapis.com/css2?family=Sora:wght@300;400;600;700;800;900&family=DM+Sans:ital,wght@0,300;0,400;1,300&display=swap');
-                body { background: #ffffff; margin: 0; }
-            `}</style>
 
             {/* Ambient blobs — brand colors ajustados para fondo claro */}
             <div className="fixed inset-0 pointer-events-none overflow-hidden" style={{ zIndex: 0 }}>
@@ -328,5 +312,6 @@ export default function Home() {
                 <div style={{ height: "5rem" }} />
             </div>
         </div>
+      </>
     )
 }

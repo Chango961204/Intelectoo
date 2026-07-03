@@ -2,6 +2,8 @@ import { motion, useInView, AnimatePresence } from "framer-motion"
 import { useRef, useState } from "react"
 import { Link } from "react-router-dom"
 import { BadgeCheck, Star, X, Flag, HandCoins, UserRoundCheck, UserRoundCog, RefreshCw } from "lucide-react"
+import Seo from "../components/Seo"
+import { siteMeta } from "../data/seoData"
 
 const mvv = [
     {
@@ -268,8 +270,9 @@ export default function Servicios() {
     const mvvInView = useInView(mvvRef, { once: true, margin: "-60px" })
 
     return (
-        <div className="relative min-h-screen text-white" style={{ background: "linear-gradient(135deg, #ffffff 0%, #f4f7fb 50%, #ffffff 100%)", fontFamily: "'Sora', 'DM Sans', sans-serif", }} >
-            <style>{`@import url('https://fonts.googleapis.com/css2?family=Sora:wght@300;400;600;700;800;900&display=swap');`}</style>
+        <>
+            <Seo {...siteMeta.servicios} />
+            <div className="relative min-h-screen text-white" style={{ background: "linear-gradient(135deg, #ffffff 0%, #f4f7fb 50%, #ffffff 100%)" }} >
 
             {/* Modal — fuera del flujo de scroll */}
             <MVVModal item={activeModal} onClose={() => setActiveModal(null)} />
@@ -435,5 +438,6 @@ export default function Servicios() {
 
             </div>
         </div>
+      </>
     )
 }
